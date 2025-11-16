@@ -1,0 +1,355 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Fase 3 – Análisis Exploratorio de Datos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="page">
+
+  <!-- NAV FASES -->
+  <div class="phases-nav">
+    <a href="Proyecto_T1_RomanBallesteros.html" class="phase-link">Definición del Proyecto</a>
+    <a href="fase2_proyecto.html" class="phase-link">Comprensión de los Datos</a>
+    <a href="fase3_proyecto.html" class="phase-link active">Análisis Exploratorio de Datos</a>
+  </div>
+
+  <!-- ========== HERO FASE 3 ========== -->
+  <div class="hero-container">
+
+    <div class="hero-left">
+      <h1 class="hero-title">Análisis Exploratorio de Datos (EDA)</h1>
+      <p class="hero-subtitle">Explorar patrones, relaciones y problemas en los datos</p>
+
+      <div class="hero-badges">
+        <span class="hero-badge">Román Ballesteros Martínez</span>
+        <span class="hero-badge">Zara Sales EDA</span>
+        <span class="hero-badge">EDA</span>
+      </div>
+
+      <p class="hero-description">
+        En esta fase se realiza el análisis exploratorio de datos (EDA) del dataset
+        <i>Zara_sales_EDA.csv</i>, con el objetivo de entender cómo se comportan las variables
+        clave, qué relaciones existen entre ellas y qué problemas de calidad o distribución
+        pueden afectar a futuros análisis o modelos.
+      </p>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-box">
+        <p class="hero-box-title">Resumen de la fase</p>
+        <ul class="hero-info-list">
+          <li><span>👤</span> Autor: <b>Román Ballesteros Martínez</b></li>
+          <li><span>📊</span> EDA sobre: <b>ventas, precio, sección, temporada…</b></li>
+          <li><span>🔍</span> Análisis univariado y bi/multivariado</li>
+          <li><span>⚠️</span> Detección de outliers y problemas de datos</li>
+          <li><span>🧠</span> Conclusiones: “¿Qué nos dicen los datos?”</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <!-- ========== FIN HERO ========== -->
+
+  <!-- Cabecera de Fase 3 -->
+  <div class="phase-header">
+    <p class="phase-title">Análisis Exploratorio de Datos</p>
+    <p class="phase-subtitle">
+      Exploración sistemática de las variables para entender el comportamiento de las ventas de Zara.
+    </p>
+    <div class="phase-badges">
+      <span class="phase-badge">EDA</span>
+      <span class="phase-badge">Análisis univariado</span>
+      <span class="phase-badge">Análisis bivariado</span>
+      <span class="phase-badge">Conclusiones</span>
+    </div>
+  </div>
+
+  <!-- Layout: SOLO UNA COLUMNA -->
+  <div class="layout">
+    <div>
+
+      <!-- 1. Realizar el EDA del conjunto de datos -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-number">1</div>
+          <div>
+            <p class="section-title">Visión general del EDA</p>
+            <p class="section-subtitle">Punto de partida del análisis exploratorio</p>
+          </div>
+        </div>
+        <div class="section-body">
+          <p>
+            En esta fase se parte del dataset ya revisado en la Fase 2 (estructura y calidad)
+            para centrarse en el análisis exploratorio de datos (EDA). El objetivo es entender
+            cómo se distribuyen las variables clave y qué patrones aparecen en las ventas
+            según diferentes características de los productos.
+          </p>
+
+          <p><b>Carga del dataset en R (ejemplo):</b></p>
+          <pre><code>
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+df <- read_csv("Zara_sales_EDA.csv")
+
+# Vista rápida
+glimpse(df)
+head(df)
+          </code></pre>
+
+          <p>
+            A partir de aquí se realizan análisis univariados (una variable), bivariados
+            (dos variables) y, cuando es útil, multivariados (más de dos variables a la vez).
+          </p>
+        </div>
+      </div>
+
+      <!-- 2. Análisis univariado -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-number">2</div>
+          <div>
+            <p class="section-title">Análisis univariado</p>
+            <p class="section-subtitle">Estudio de variables individuales</p>
+          </div>
+        </div>
+        <div class="section-body">
+          <p>
+            El análisis univariado se centra en estudiar cada variable por separado, observando
+            su distribución y posibles valores atípicos. Aquí se analizan principalmente las
+            variables numéricas (por ejemplo, precio y ventas) y algunas categóricas clave.
+          </p>
+
+          <p><b>Ejemplos de análisis univariado (numéricas):</b></p>
+          <ul>
+            <li>Distribución de <b>precio</b> de los productos.</li>
+            <li>Distribución de <b>ventas</b> (unidades vendidas).</li>
+          </ul>
+
+          <pre><code>
+# Estadísticos básicos
+summary(df$price)
+summary(df$sales)
+
+# Histograma de precios
+ggplot(df, aes(x = price)) +
+  geom_histogram(bins = 30) +
+  labs(title = "Distribución de precios", x = "Precio", y = "Frecuencia")
+
+# Histograma de ventas
+ggplot(df, aes(x = sales)) +
+  geom_histogram(bins = 30) +
+  labs(title = "Distribución de ventas", x = "Ventas", y = "Frecuencia")
+          </code></pre>
+
+          <p><b>Ejemplos de análisis univariado (categóricas):</b></p>
+          <ul>
+            <li>Frecuencia de productos por <b>sección</b> (MAN / WOMAN).</li>
+            <li>Número de productos por <b>temporada</b>.</li>
+          </ul>
+
+          <pre><code>
+table(df$section)
+prop.table(table(df$section))
+
+ggplot(df, aes(x = section)) +
+  geom_bar() +
+  labs(title = "Número de productos por sección", x = "Sección", y = "Cantidad")
+          </code></pre>
+
+          <p>
+            Este análisis permite entender si la distribución de las variables es razonable
+            (por ejemplo, si hay muchos productos concentrados en un rango de precio concreto
+            o una sección dominante en el catálogo).
+          </p>
+        </div>
+      </div>
+
+      <!-- 3. Análisis bi/multivariado -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-number">3</div>
+          <div>
+            <p class="section-title">Análisis bi/multivariado</p>
+            <p class="section-subtitle">Relaciones entre variables</p>
+          </div>
+        </div>
+        <div class="section-body">
+          <p>
+            El análisis bi y multivariado busca relaciones entre variables, por ejemplo:
+            cómo se relacionan ventas y precio, o cómo cambian las ventas entre secciones
+            o temporadas.
+          </p>
+
+          <p><b>3.1. Precio vs. Ventas</b></p>
+          <p>
+            Se explora si existe relación entre el precio del producto y las unidades vendidas.
+          </p>
+          <pre><code>
+ggplot(df, aes(x = price, y = sales)) +
+  geom_point(alpha = 0.4) +
+  labs(title = "Relación entre precio y ventas",
+       x = "Precio",
+       y = "Ventas")
+          </code></pre>
+
+          <p><b>3.2. Ventas por sección</b></p>
+          <pre><code>
+df %>%
+  group_by(section) %>%
+  summarise(ventas_medias = mean(sales, na.rm = TRUE),
+            ventas_totales = sum(sales, na.rm = TRUE))
+          </code></pre>
+
+          <pre><code>
+ggplot(df, aes(x = section, y = sales)) +
+  geom_boxplot() +
+  labs(title = "Distribución de ventas por sección",
+       x = "Sección",
+       y = "Ventas")
+          </code></pre>
+
+          <p><b>3.3. Ventas por temporada</b></p>
+          <pre><code>
+df %>%
+  group_by(season) %>%
+  summarise(ventas_medias = mean(sales, na.rm = TRUE),
+            ventas_totales = sum(sales, na.rm = TRUE))
+          </code></pre>
+
+          <pre><code>
+ggplot(df, aes(x = season, y = sales)) +
+  geom_boxplot() +
+  labs(title = "Distribución de ventas por temporada",
+       x = "Temporada",
+       y = "Ventas")
+          </code></pre>
+
+          <p><b>3.4. Promoción vs. Ventas</b></p>
+          <pre><code>
+ggplot(df, aes(x = promotion, y = sales)) +
+  geom_boxplot() +
+  labs(title = "Ventas con y sin promoción",
+       x = "Promoción",
+       y = "Ventas")
+          </code></pre>
+
+          <p>
+            Estos análisis permiten identificar variables que parecen tener impacto
+            en las ventas, y sugieren posibles segmentaciones (por ejemplo, por sección
+            o temporada) para análisis futuros.
+          </p>
+        </div>
+      </div>
+
+      <!-- 4. Problemas encontrados en los datos -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-number">4</div>
+          <div>
+            <p class="section-title">Problemas encontrados en los datos</p>
+            <p class="section-subtitle">Limitaciones y cuestiones de calidad</p>
+          </div>
+        </div>
+        <div class="section-body">
+          <p>
+            Durante el EDA se han detectado varios problemas que afectan a la calidad
+            del análisis y que deberían ser tratados en profundidad en la fase de
+            preparación de datos:
+          </p>
+
+          <ul>
+            <li>
+              <b>Valores atípicos (outliers) en ventas y precio</b>  
+              Algunos productos presentan ventas o precios muy extremos, que pueden
+              ser reales (productos muy especiales) o errores de registro. Es necesario
+              decidir si se mantienen, se transforman o se excluyen.
+            </li>
+            <li>
+              <b>Distribución muy sesgada de las ventas</b>  
+              La mayoría de productos tienen ventas bajas y solo unos pocos concentran
+              gran parte de las unidades vendidas, lo que puede condicionar los resultados.
+            </li>
+            <li>
+              <b>Posibles problemas en categorías</b>  
+              Etiquetas de sección o temporada podrían no estar completamente estandarizadas
+              (por ejemplo, diferencias de mayúsculas/minúsculas o espacios).
+            </li>
+            <li>
+              <b>Valores faltantes en algunas variables</b>  
+              Aunque el impacto puede ser limitado, conviene revisar qué variables tienen NA
+              y si afectan a métricas importantes del negocio.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 5. ¿Qué nos dicen los datos? -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-number">5</div>
+          <div>
+            <p class="section-title">¿Qué nos dicen los datos?</p>
+            <p class="section-subtitle">Conclusiones del análisis exploratorio</p>
+          </div>
+        </div>
+        <div class="section-body">
+          <p>
+            A partir del EDA realizado se pueden extraer varias conclusiones preliminares
+            sobre el comportamiento de las ventas en Zara:
+          </p>
+
+          <ul>
+            <li>
+              <b>Las ventas están muy concentradas en un conjunto reducido de productos</b>  
+              La mayoría de referencias tienen ventas bajas, mientras que unas pocas
+              acumulan gran parte del volumen total. Esto sugiere la existencia de
+              productos “estrella” y otros de rotación muy limitada.
+            </li>
+            <li>
+              <b>El precio influye claramente en el volumen de ventas</b>  
+              En general, los productos más económicos tienden a vender más unidades,
+              aunque existen productos de precio alto con buen rendimiento,
+              posiblemente asociados a segmentos específicos del catálogo.
+            </li>
+            <li>
+              <b>Existen diferencias entre secciones y temporadas</b>  
+              La sección WOMAN (si el dataset lo confirma) podría concentrar mayor
+              número de ventas, y ciertas temporadas muestran patrones de ventas
+              más elevados que otras.
+            </li>
+            <li>
+              <b>Las promociones parecen asociarse a mayores niveles de ventas</b>  
+              Los productos en promoción muestran, en promedio, un incremento
+              en las unidades vendidas, aunque sería necesario analizar también
+              el impacto en términos de margen.
+            </li>
+            <li>
+              <b>La calidad de los datos es razonable, pero mejorable</b>  
+              Los problemas de outliers, valores faltantes y posibles
+              incoherencias de etiquetado deben abordarse en la fase de
+              preparación de datos para evitar conclusiones distorsionadas.
+            </li>
+          </ul>
+
+          <p>
+            Estas conclusiones orientan las siguientes fases del proyecto, ayudando
+            a decidir qué variables son más relevantes, qué transformaciones se
+            necesitan y qué hipótesis pueden ser interesantes de validar en
+            futuros modelos o análisis avanzados.
+          </p>
+        </div>
+      </div>
+
+    </div> <!-- fin columna principal -->
+  </div> <!-- fin .layout -->
+
+</div> <!-- fin .page -->
+
+</body>
+</html>

@@ -1,0 +1,395 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Fase 1 – Definición del Proyecto</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="page">
+
+  <!-- NAV FASES -->
+  <div class="phases-nav">
+    <a href="Proyecto_T1_RomanBallesteros.html" class="phase-link active">Definición del Proyecto</a>
+    <a href="fase2_proyecto.html" class="phase-link">Comprensión de los Datos</a>
+    <a href="fase3_proyecto.html" class="phase-link">Preparación de los Datos</a>
+  </div>
+
+  <!-- ========== HERO / PORTADA GRANDE ========== -->
+  <div class="hero-container">
+
+    <div class="hero-left">
+      <h1 class="hero-title">Zara Sales EDA</h1>
+      <p class="hero-subtitle">Análisis Exploratorio de Ventas · Proyecto de Ciencia de Datos</p>
+
+      <div class="hero-badges">
+        <span class="hero-badge">Román Ballesteros Martínez</span>
+        <span class="hero-badge">Fundamentos de la Ciencia de Datos</span>
+        <span class="hero-badge">Definición del Proyecto</span>
+      </div>
+
+      <p class="hero-description">
+        Esta primera fase define el alcance del proyecto, el problema de negocio que se quiere abordar,
+        los objetivos de análisis y las fuentes de datos disponibles. Es la base sobre la que se
+        construirán las siguientes fases de comprensión, preparación y modelado.
+      </p>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-box">
+        <p class="hero-box-title">Información del proyecto</p>
+        <ul class="hero-info-list">
+          <li><span>👤</span> Autor: <b>Román Ballesteros Martínez</b></li>
+          <li><span>📁</span> Proyecto: Zara Sales EDA</li>
+          <li><span>📅</span> Fecha: <b>2025</b></li>
+          <li><span>📊</span> Dataset: <i>Zara_sales_EDA.csv</i></li>
+          <li><span>🎯</span> Alcance: Fases 1–3 (EDA sin modelado)</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <!-- ========== FIN HERO ========== -->
+
+  <!-- Cabecera de Fase 1 -->
+  <div class="phase-header">
+    <p class="phase-title">Definición del Proyecto</p>
+    <p class="phase-subtitle">
+      Entender el negocio, definir el problema y concretar qué se espera del proyecto de datos.
+    </p>
+    <div class="phase-badges">
+      <span class="phase-badge">Definición de objetivos</span>
+      <span class="phase-badge">Problema de negocio</span>
+      <span class="phase-badge">Fuentes de datos</span>
+      <span class="phase-badge">Plan de trabajo</span>
+    </div>
+  </div>
+
+  <!-- Layout: SOLO UNA COLUMNA -->
+  <div class="layout">
+
+    <div>
+      <!-- 1. Título del proyecto -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-number">1</div>
+          <div>
+            <p class="section-title">Título del Proyecto</p>
+            <p class="section-subtitle">Nombre completo del proyecto</p>
+          </div>
+        </div>
+        <div class="section-body">
+          <p><b>Nombre completo del proyecto:</b></p>
+          <p>
+            <b>Análisis Exploratorio de Ventas de Zara (Zara Sales EDA)</b>
+          </p>
+          <p>
+            El título resume el objetivo principal del trabajo: realizar un análisis exploratorio de los datos
+            de ventas de Zara, centrándose en entender patrones y relaciones entre variables que influyen
+            en el rendimiento comercial de los productos.
+          </p>
+        </div>
+      </div>
+
+      <!-- 2. Introducción – Problema de negocio -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-number">2</div>
+          <div>
+            <p class="section-title">Introducción – Problema de negocio</p>
+            <p class="section-subtitle">Qué quiere saber la empresa</p>
+          </div>
+        </div>
+        <div class="section-body">
+          <p><b>Contexto general</b></p>
+          <p>
+            Zara es una empresa de moda con un catálogo amplio y ciclos de colección muy rápidos.
+            Decisiones incorrectas en precios, promociones o surtido pueden implicar exceso de stock,
+            rupturas de stock o pérdida de oportunidades de venta. Por ello, es clave comprender
+            cómo se comportan las ventas según diferentes características del producto.
+          </p>
+
+          <p><b>Decisión de negocio que se debe tomar</b></p>
+          <p>
+            La empresa quiere utilizar los datos históricos de ventas para:
+          </p>
+          <ul>
+            <li>Identificar qué tipos de productos funcionan mejor (por sección, temporada, rango de precio, etc.).</li>
+            <li>Detectar configuraciones de producto menos rentables o con baja rotación.</li>
+            <li>Apoyar la planificación de inventario y la definición de estrategias de promoción.</li>
+          </ul>
+
+          <p><b>Preguntas que se van a responder con el proyecto</b></p>
+          <ul>
+            <li>¿Qué productos o categorías venden más y cuáles tienen menor rotación?</li>
+            <li>¿Existen patrones de ventas según la temporada o la sección (MAN / WOMAN)?</li>
+            <li>¿Cómo afecta el precio al volumen de ventas? ¿Se observa algún rango de precios “óptimo”?</li>
+            <li>¿Las promociones aumentan realmente las ventas o solo desplazan compras en el tiempo?</li>
+            <li>¿Hay diferencias importantes según el origen, el material u otras características del producto?</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 3. Objetivos -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-number">3</div>
+          <div>
+            <p class="section-title">Objetivos</p>
+            <p class="section-subtitle">Qué se quiere conseguir con el análisis</p>
+          </div>
+        </div>
+        <div class="section-body">
+          <p><b>Objetivo general</b></p>
+          <p>
+            Realizar un análisis exploratorio de datos (EDA) sobre el dataset de ventas de Zara
+            para comprender el comportamiento de las ventas y extraer información que sirva
+            de apoyo a futuras decisiones de negocio y a posibles modelos predictivos.
+          </p>
+
+          <p><b>Objetivos específicos</b></p>
+          <ul>
+            <li>
+              <b>Describir la estructura y la calidad del dataset de ventas</b>  
+              Identificar cuántos registros y variables existen, qué tipo de datos contiene cada columna
+              y qué problemas de calidad (NA, duplicados, valores fuera de rango) pueden afectar al análisis.
+            </li>
+            <li>
+              <b>Analizar la distribución de las variables clave</b>  
+              Estudiar ventas, precio, temporada, sección, etc., mediante estadísticas descriptivas
+              y visualizaciones básicas para conocer comportamientos generales del negocio.
+            </li>
+            <li>
+              <b>Explorar relaciones entre variables</b>  
+              Analizar, por ejemplo, cómo se relacionan ventas y precio, ventas y temporada,
+              o ventas y sección, para detectar patrones interesantes o posibles segmentos.
+            </li>
+            <li>
+              <b>Generar hipótesis para fases posteriores</b>  
+              A partir de los resultados del EDA, plantear preguntas e hipótesis que puedan
+              ser validadas con modelos más avanzados en futuros proyectos.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 4. Fuentes de datos -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-number">4</div>
+          <div>
+            <p class="section-title">Fuentes de datos</p>
+            <p class="section-subtitle">Dataset principal del proyecto</p>
+          </div>
+        </div>
+        <div class="section-body">
+          <p><b>Dataset principal:</b> <i>Zara_sales_EDA.csv</i></p>
+          <p>
+            Este fichero contiene información tabular donde cada fila representa un producto o una referencia
+            de producto con datos asociados a sus ventas y a sus características comerciales.
+          </p>
+
+          <p><b>Tipos de variables que incluye:</b></p>
+          <ul>
+            <li>
+              <b>Variables numéricas</b>  
+              Por ejemplo: unidades vendidas, precio, quizá descuentos aplicados u otras métricas cuantitativas.
+            </li>
+            <li>
+              <b>Variables categóricas</b>  
+              Por ejemplo: sección (MAN, WOMAN), temporada, tipo de producto, origen, material, presencia de promoción,
+              posición en tienda, etc.
+            </li>
+          </ul>
+
+          <p>
+            En caso de añadir más fuentes (por ejemplo, otra tabla con información de tiendas o clientes),
+            se documentará qué aporta cada una, cuál es su origen y cómo se relaciona con el dataset principal.
+          </p>
+        </div>
+      </div>
+
+      <!-- 5. Plan de trabajo -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-number">5</div>
+          <div>
+            <p class="section-title">Plan de Trabajo</p>
+            <p class="section-subtitle">Cómo se organiza el proyecto en el tiempo</p>
+          </div>
+        </div>
+        <div class="section-body">
+          <p class="small-label">NOTA</p>
+          <p>
+            El siguiente cronograma está alineado con la planificación de la asignatura.
+            Para la entrega de T1 se trabaja principalmente en las fases 1–3.
+          </p>
+
+          <table class="timeline-table">
+            <tr>
+              <th>Fase del Proyecto</th>
+              <th>01</th>
+              <th>02</th>
+              <th>03</th>
+              <th>04</th>
+              <th>05</th>
+              <th>06</th>
+              <th>07</th>
+              <th>08</th>
+              <th>09</th>
+              <th>10</th>
+            </tr>
+            <tr>
+              <td>Fase 1: Definición del proyecto</td>
+              <td>X</td><td>X</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+              <td>Fase 2: Comprensión de los datos</td>
+              <td></td><td></td><td>X</td><td>X</td><td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+              <td>Fase 3: Preparación de los datos</td>
+              <td></td><td></td><td></td><td>X</td><td>X</td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+              <td>Fase 4: Modelado</td>
+              <td></td><td></td><td></td><td></td><td></td><td>X</td><td>X</td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+              <td>Fase 5: Evaluación</td>
+              <td></td><td></td><td></td><td></td><td></td><td></td><td>X</td><td>X</td><td></td><td></td>
+            </tr>
+            <tr>
+              <td>Fase 6: Implantación</td>
+              <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>X</td><td></td><td></td>
+            </tr>
+            <tr>
+              <td>Entrega del Proyecto</td>
+              <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>X</td><td></td>
+            </tr>
+          </table>
+
+          <p>
+            Para este trabajo, el foco está en:
+          </p>
+          <ul>
+            <li>Completar la definición del proyecto (Fase 1).</li>
+            <li>Entender la estructura y calidad de los datos (Fase 2).</li>
+            <li>Preparar los datos para el análisis exploratorio (Fase 3).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 6. Metodología -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-number">6</div>
+          <div>
+            <p class="section-title">Metodología</p>
+            <p class="section-subtitle">Cómo se va a trabajar con los datos</p>
+          </div>
+        </div>
+        <div class="section-body">
+          <p><b>Enfoque general</b></p>
+          <p>
+            Se seguirá un enfoque iterativo: primero se entenderá el dato disponible,
+            después se limpiará y preparará, y por último se explorarán patrones usando
+            técnicas descriptivas y de visualización.
+          </p>
+
+          <p><b>¿Cómo se hará el análisis inicial de los datos?</b></p>
+          <ul>
+            <li>Lectura del dataset en R.</li>
+            <li>Inspección de estructura: tipos de columnas, número de registros, valores únicos.</li>
+            <li>Detección de valores perdidos, duplicados y posibles errores.</li>
+          </ul>
+
+          <p><b>Técnicas necesarias para responder a las preguntas de negocio</b></p>
+          <ul>
+            <li>Estadística descriptiva (medidas de tendencia central y dispersión).</li>
+            <li>Tablas de frecuencia y cruces entre variables categóricas.</li>
+            <li>Visualización de datos (gráficos de barras, histogramas, boxplots, líneas).</li>
+            <li>Comparaciones entre grupos (por ejemplo, secciones, temporadas, rangos de precio).</li>
+          </ul>
+
+          <p><b>Entregables principales</b></p>
+          <ul>
+            <li>Un informe en PDF/HTML con la descripción de las fases 1–3.</li>
+            <li>Tablas y gráficos clave que resuman los hallazgos del EDA.</li>
+            <li>Listado de hipótesis e ideas para futuros proyectos de modelado.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 7. Tecnología -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-number">7</div>
+          <div>
+            <p class="section-title">Tecnología</p>
+            <p class="section-subtitle">Herramientas que se van a utilizar</p>
+          </div>
+        </div>
+        <div class="section-body">
+          <p><b>Gestión de datos</b></p>
+          <ul>
+            <li>Ficheros CSV como formato principal de intercambio de datos.</li>
+            <li>Posible uso de bases de datos relacionales (PostgreSQL) para centralizar la información.</li>
+          </ul>
+
+          <p><b>Lenguaje de programación y librerías</b></p>
+          <ul>
+            <li><b>Lenguaje principal:</b> R.</li>
+            <li><b>Librerías:</b> 
+              <ul>
+                <li><b>readr</b>: carga de ficheros CSV.</li>
+                <li><b>dplyr</b> y <b>tidyr</b>: transformación y limpieza de datos.</li>
+                <li><b>ggplot2</b>: visualización de datos.</li>
+                <li>Otras librerías según necesidades (lubridate, stringr, etc.).</li>
+              </ul>
+            </li>
+          </ul>
+
+          <p><b>Plataforma de desarrollo</b></p>
+          <ul>
+            <li>RStudio (Cloud) como entorno principal de trabajo.</li>
+          </ul>
+
+          <p><b>Control de versiones</b></p>
+          <ul>
+            <li>Git + GitHub (opcional) para mantener un historial del código y del informe.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 8. Referencias -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-number">8</div>
+          <div>
+            <p class="section-title">Referencias</p>
+            <p class="section-subtitle">Material que se va a consultar</p>
+          </div>
+        </div>
+        <div class="section-body">
+          <p>Principales referencias previstas para el desarrollo del proyecto:</p>
+          <ul>
+            <li>Apuntes y material de la asignatura <i>Fundamentos de la Ciencia de Datos</i>.</li>
+            <li>Documentación oficial de R y del ecosistema <i>tidyverse</i>.</li>
+            <li>Manual y recursos de buenas prácticas de modelado y EDA.</li>
+            <li>Documentación sobre diseño de bases de datos relacionales y SQL.</li>
+            <li>Descripción y posible documentación pública de la fuente del dataset <i>Zara_sales_EDA</i> (por ejemplo, Kaggle).</li>
+          </ul>
+        </div>
+      </div>
+
+    </div> <!-- fin columna principal -->
+
+  </div> <!-- fin .layout -->
+
+</div> <!-- fin .page -->
+
+</body>
+</html>

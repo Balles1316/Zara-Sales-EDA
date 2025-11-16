@@ -1,0 +1,352 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Comprensión de los Datos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="page">
+
+  <!-- NAV FASES -->
+  <div class="phases-nav">
+    <a href="Proyecto_T1_RomanBallesteros.html" class="phase-link">Definición del Proyecto</a>
+    <a href="fase2_proyecto.html" class="phase-link active">Comprensión de los Datos</a>
+    <a href="fase3_proyecto.html" class="phase-link">Preparación de los Datos</a>
+  </div>
+
+  <!-- ========== HERO FASE 2 ========== -->
+  <div class="hero-container">
+
+    <div class="hero-left">
+      <h1 class="hero-title">Comprensión de los Datos</h1>
+      <p class="hero-subtitle">Estructura, calidad y primeras ideas sobre el dataset</p>
+
+      <div class="hero-badges">
+        <span class="hero-badge">Román Ballesteros Martínez</span>
+        <span class="hero-badge">Zara Sales EDA</span>
+        <span class="hero-badge">Comprensión de los Datos</span>
+      </div>
+
+      <p class="hero-description">
+        En esta fase se analiza en detalle el dataset <i>Zara_sales_EDA.csv</i>, revisando
+        su estructura, tipos de variables, valores ausentes, duplicados y posibles outliers.
+        El objetivo es entender qué información contiene y en qué estado se encuentra antes
+        de pasar a la fase de preparación y limpieza.
+      </p>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-box">
+        <p class="hero-box-title">Resumen de la fase</p>
+        <ul class="hero-info-list">
+          <li><span>👤</span> Autor: <b>Román Ballesteros Martínez</b></li>
+          <li><span>📊</span> Dataset: <b>Zara_sales_EDA.csv</b></li>
+          <li><span>📁</span> Objetivo: entender estructura y calidad</li>
+          <li><span>🔍</span> Análisis: tipos de datos, NA, duplicados, outliers</li>
+          <li><span>📈</span> Resultados: primeras estadísticas descriptivas</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <!-- ========== FIN HERO ========== -->
+
+  <!-- Cabecera de Fase 2 -->
+  <div class="phase-header">
+    <p class="phase-title">Comprensión de los Datos</p>
+    <p class="phase-subtitle">
+      ¿Qué información contiene el dataset? ¿En qué estado está la calidad del dato?
+    </p>
+    <div class="phase-badges">
+      <span class="phase-badge">Estructura del dataset</span>
+      <span class="phase-badge">Calidad del dato</span>
+      <span class="phase-badge">Estadísticos descriptivos</span>
+    </div>
+  </div>
+
+  <!-- Layout: solo columna principal -->
+  <div class="layout">
+    <div>
+
+      <!-- 1. Descripción general del dataset -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-number">1</div>
+          <div>
+            <p class="section-title">Descripción general del dataset</p>
+            <p class="section-subtitle">Contexto y contenido básico</p>
+          </div>
+        </div>
+        <div class="section-body">
+          <p>
+            El dataset <b>Zara_sales_EDA.csv</b> recoge información de productos de Zara
+            junto con datos de ventas y características relevantes para el negocio
+            (sección, temporada, precio, etc.).
+          </p>
+          <p>
+            Antes de realizar cualquier transformación o modelo, es necesario entender
+            cuántos registros y variables tiene, qué representa cada columna y si la
+            información recogida es consistente con el contexto del problema.
+          </p>
+
+          <p><b>Lectura inicial en R (ejemplo):</b></p>
+          <pre><code>
+library(readr)
+
+df <- read_csv("Zara_sales_EDA.csv")
+
+dim(df)       # número de filas y columnas
+names(df)     # nombre de las columnas
+          </code></pre>
+        </div>
+      </div>
+
+      <!-- 2. Estructura del dataset y tipos de variables -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-number">2</div>
+          <div>
+            <p class="section-title">Estructura del dataset</p>
+            <p class="section-subtitle">Tipos de variables y significado</p>
+          </div>
+        </div>
+        <div class="section-body">
+          <p>
+            En esta sección se revisa qué tipo de datos contiene cada columna y cómo se
+            interpreta a nivel de negocio.
+          </p>
+
+          <p><b>Ejemplo de inspección de estructura en R:</b></p>
+          <pre><code>
+str(df)
+glimpse(df)
+          </code></pre>
+
+          <p><b>Aspectos a documentar:</b></p>
+          <ul>
+            <li><b>Variables numéricas</b>: por ejemplo, precio, unidades vendidas, ingresos, etc.</li>
+            <li><b>Variables categóricas</b>: sección (MAN/WOMAN), temporada, tipo de producto, origen, material…</li>
+            <li><b>Variables de tipo fecha</b> (si existen): lanzamientos, fechas de venta, etc.</li>
+            <li><b>Variables derivadas</b>: campos calculados a partir de otras columnas.</li>
+          </ul>
+
+          <p>
+            A partir de esta revisión se pueden detectar variables irrelevantes, columnas
+            redundantes o campos que conviene transformar (por ejemplo, pasar códigos a factores).
+          </p>
+        </div>
+      </div>
+
+      <!-- 3. Calidad del dato: NA, duplicados, inconsistencias -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-number">3</div>
+          <div>
+            <p class="section-title">Calidad del dato</p>
+            <p class="section-subtitle">Valores ausentes, duplicados y errores</p>
+          </div>
+        </div>
+        <div class="section-body">
+          <p>
+            Un paso clave es evaluar la calidad de los datos. Un dataset con muchos
+            valores ausentes o inconsistentes puede llevar a conclusiones erróneas
+            si no se trata correctamente.
+          </p>
+
+          <p><b>Valores ausentes (NA):</b></p>
+          <ul>
+            <li>Cálculo del número de NA por columna.</li>
+            <li>Identificación de variables con demasiada información faltante.</li>
+            <li>Reflexión sobre si tiene sentido imputar, eliminar filas o descartar variables.</li>
+          </ul>
+
+          <pre><code>
+colSums(is.na(df))   # número de NA por columna
+          </code></pre>
+
+          <p><b>Duplicados:</b></p>
+          <ul>
+            <li>Búsqueda de filas duplicadas completas.</li>
+            <li>Revisión de claves potenciales (por ejemplo, ID de producto).</li>
+          </ul>
+
+          <pre><code>
+sum(duplicated(df))          # cuántas filas duplicadas hay
+df_dup <- df[duplicated(df),]
+          </code></pre>
+
+          <p><b>Inconsistencias y errores de formato:</b></p>
+          <ul>
+            <li>Valores imposibles (precios negativos, ventas extremadamente altas, etc.).</li>
+            <li>Valores categóricos mal escritos (por ejemplo, "Man", "MAN ", "man").</li>
+            <li>Rangos de fechas no coherentes, si aplica.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 4. Estadísticos descriptivos de variables numéricas -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-number">4</div>
+          <div>
+            <p class="section-title">Análisis descriptivo inicial</p>
+            <p class="section-subtitle">Variables numéricas</p>
+          </div>
+        </div>
+        <div class="section-body">
+          <p>
+            Se calculan estadísticas básicas de las variables numéricas para entender
+            su distribución y detectar posibles outliers.
+          </p>
+
+          <p><b>Ejemplos de métricas:</b></p>
+          <ul>
+            <li>Media, mediana y desviación estándar de las ventas.</li>
+            <li>Mínimo, máximo y rangos de precio.</li>
+            <li>Percentiles para identificar valores extremos.</li>
+          </ul>
+
+          <pre><code>
+summary(df$price)
+summary(df$sales)   # ejemplo: columna de ventas
+          </code></pre>
+
+          <p>
+            A partir de estos resultados se puede evaluar si hay productos con precios
+            fuera de lo esperado o si la distribución de ventas está muy concentrada en
+            pocos productos.
+          </p>
+        </div>
+      </div>
+
+      <!-- 5. Variables categóricas: frecuencias y distribución -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-number">5</div>
+          <div>
+            <p class="section-title">Distribución de variables categóricas</p>
+            <p class="section-subtitle">Sección, temporada, tipo de producto…</p>
+          </div>
+        </div>
+        <div class="section-body">
+          <p>
+            En esta parte se analiza cómo se reparten los registros entre las distintas
+            categorías de las variables no numéricas.
+          </p>
+
+          <p><b>Ejemplos de análisis:</b></p>
+          <ul>
+            <li>Número de productos por sección (MAN vs WOMAN).</li>
+            <li>Reparto de productos por temporada (Spring/Summer, Fall/Winter).</li>
+            <li>Frecuencia de los distintos tipos de producto o materiales.</li>
+          </ul>
+
+          <pre><code>
+table(df$section)
+prop.table(table(df$season))
+          </code></pre>
+
+          <p>
+            Esta información ayuda a detectar posibles desequilibrios (por ejemplo,
+            demasiados productos de una sección y pocos de otra) que habrá que tener en cuenta
+            más adelante en el análisis.
+          </p>
+        </div>
+      </div>
+
+      <!-- 6. Relaciones preliminares entre variables -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-number">6</div>
+          <div>
+            <p class="section-title">Relaciones preliminares</p>
+            <p class="section-subtitle">Primeras correlaciones y cruces</p>
+          </div>
+        </div>
+        <div class="section-body">
+          <p>
+            Aunque el análisis detallado de relaciones se desarrollará en el EDA (Fase 3),
+            en la Fase 2 ya se pueden explorar algunos patrones básicos.
+          </p>
+
+          <p><b>Ejemplos de relaciones a revisar:</b></p>
+          <ul>
+            <li>Ventas medias por sección.</li>
+            <li>Ventas por rangos de precio.</li>
+            <li>Ventas medias por temporada.</li>
+          </ul>
+
+          <pre><code>
+# Ventas medias por sección
+aggregate(sales ~ section, data = df, FUN = mean)
+
+# Ventas medias por temporada
+aggregate(sales ~ season, data = df, FUN = mean)
+          </code></pre>
+
+          <p>
+            Estas primeras comparaciones orientan sobre qué variables pueden ser más
+            relevantes de cara al análisis exploratorio y a posibles modelos futuros.
+          </p>
+        </div>
+      </div>
+
+      <!-- 7. Decisiones para la preparación de datos -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-number">7</div>
+          <div>
+            <p class="section-title">Implicaciones para la Fase 3</p>
+            <p class="section-subtitle">Qué habrá que limpiar o transformar</p>
+          </div>
+        </div>
+        <div class="section-body">
+          <p>
+            A partir de la comprensión del dataset, se pueden definir las tareas
+            concretas de preparación y limpieza que se abordarán en la Fase 3.
+          </p>
+
+          <p><b>Posibles decisiones:</b></p>
+          <ul>
+            <li>Eliminar filas completamente duplicadas.</li>
+            <li>Imputar o eliminar filas con NA en variables clave.</li>
+            <li>Corregir valores categóricos mal escritos o unificar etiquetas.</li>
+            <li>Crear nuevas variables derivadas (por ejemplo, rangos de precio).</li>
+            <li>Filtrar outliers extremos si distorsionan el análisis.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 8. Resumen de la Fase 2 -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-number">8</div>
+          <div>
+            <p class="section-title">Resumen de la Fase 2</p>
+            <p class="section-subtitle">Qué se ha aprendido sobre los datos</p>
+          </div>
+        </div>
+        <div class="section-body">
+          <p>
+            En esta fase se ha revisado la estructura del dataset, la calidad de los datos
+            y las primeras distribuciones de variables numéricas y categóricas.
+          </p>
+          <p>
+            Esta comprensión es imprescindible para diseñar correctamente la Fase 3, en la que
+            se aplicarán transformaciones, limpieza y preparación de los datos para poder
+            realizar un análisis exploratorio (EDA) más profundo y fiable.
+          </p>
+        </div>
+      </div>
+
+    </div> <!-- fin columna principal -->
+
+  </div> <!-- fin .layout -->
+
+</div> <!-- fin .page -->
+
+</body>
+</html>
