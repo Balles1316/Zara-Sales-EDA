@@ -2,68 +2,6 @@
 <html>
 
 <head>
-<style type="text/css">
-.inline {
-  background-color: #f7f7f7;
-  border:solid 1px #B0B0B0;
-}
-.error {
-	font-weight: bold;
-	color: #FF0000;
-}
-.warning {
-	font-weight: bold;
-}
-.message {
-	font-style: italic;
-}
-.source, .output, .warning, .error, .message {
-	padding: 0 1em;
-  border:solid 1px #F7F7F7;
-}
-.source {
-  background-color: #f5f5f5;
-}
-.left {
-  text-align: left;
-}
-.right {
-  text-align: right;
-}
-.center {
-  text-align: center;
-}
-.hl.num {
-  color: #AF0F91;
-}
-.hl.sng {
-  color: #317ECC;
-}
-.hl.com {
-  color: #AD95AF;
-  font-style: italic;
-}
-.hl.opt {
-  color: #000000;
-}
-.hl.def {
-  color: #585858;
-}
-.hl.kwa {
-  color: #295F94;
-  font-weight: bold;
-}
-.hl.kwb {
-  color: #B05A65;
-}
-.hl.kwc {
-  color: #55aa55;
-}
-.hl.kwd {
-  color: #BC5A65;
-  font-weight: bold;
-}
-</style>
   <meta charset="UTF-8">
   <title>Comprensión de los Datos</title>
   <link rel="stylesheet" href="styles.css">
@@ -176,23 +114,19 @@ con <- dbConnect(
  password="passw0rd!"
 )
           </code></pre>
-<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl def">(DBI)</span>
-<span class="hl kwd">library</span><span class="hl def">(RPostgres)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in library(RPostgres): there is no package called 'RPostgres'
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl def">con</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">dbConnect</span><span class="hl def">(</span>
- <span class="hl kwd">Postgres</span><span class="hl def">(),</span>
- <span class="hl kwc">host</span><span class="hl def">=</span><span class="hl sng">&quot;192.168.1.194&quot;</span><span class="hl def">,</span>
- <span class="hl kwc">port</span><span class="hl def">=</span><span class="hl num">5432</span><span class="hl def">,</span>
- <span class="hl kwc">dbname</span><span class="hl def">=</span><span class="hl sng">&quot;zara_db&quot;</span><span class="hl def">,</span>
- <span class="hl kwc">user</span><span class="hl def">=</span><span class="hl sng">&quot;postgres&quot;</span><span class="hl def">,</span>
- <span class="hl kwc">password</span><span class="hl def">=</span><span class="hl sng">&quot;passw0rd!&quot;</span>
-<span class="hl def">)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in h(simpleError(msg, call)): error in evaluating the argument 'drv' in selecting a method for function 'dbConnect': could not find function "Postgres"
-</pre></div>
-</div></div>
+<!--begin.rcode
+library(DBI)
+library(RPostgres)
+
+con <- dbConnect(
+ Postgres(),
+ host="192.168.1.194",
+ port=5432,
+ dbname="zara_db",
+ user="postgres",
+ password="passw0rd!"
+)
+end.rcode-->
 
           <p><b>Consultas SQL realizadas:</b></p>
 

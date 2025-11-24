@@ -1,68 +1,6 @@
 <html>
 
 <head>
-<style type="text/css">
-.inline {
-  background-color: #f7f7f7;
-  border:solid 1px #B0B0B0;
-}
-.error {
-	font-weight: bold;
-	color: #FF0000;
-}
-.warning {
-	font-weight: bold;
-}
-.message {
-	font-style: italic;
-}
-.source, .output, .warning, .error, .message {
-	padding: 0 1em;
-  border:solid 1px #F7F7F7;
-}
-.source {
-  background-color: #f5f5f5;
-}
-.left {
-  text-align: left;
-}
-.right {
-  text-align: right;
-}
-.center {
-  text-align: center;
-}
-.hl.num {
-  color: #AF0F91;
-}
-.hl.sng {
-  color: #317ECC;
-}
-.hl.com {
-  color: #AD95AF;
-  font-style: italic;
-}
-.hl.opt {
-  color: #000000;
-}
-.hl.def {
-  color: #585858;
-}
-.hl.kwa {
-  color: #295F94;
-  font-weight: bold;
-}
-.hl.kwb {
-  color: #B05A65;
-}
-.hl.kwc {
-  color: #55aa55;
-}
-.hl.kwd {
-  color: #BC5A65;
-  font-weight: bold;
-}
-</style>
   <meta charset="UTF-8">
   <title>Fase 3 – Análisis Exploratorio de Datos</title>
   <link rel="stylesheet" href="styles.css">
@@ -117,7 +55,23 @@
   <!-- ========== FIN HERO ========== -->
 
   <!-- ========== SETUP: CARGA DE DATOS (CÓDIGO OCULTO) ========== -->
-  
+  <!--begin.rcode setup, include=FALSE
+  library(readr)
+  library(dplyr)
+  library(ggplot2)
+
+  # Cargar el CSV con separador ';'
+  df <- read_delim("Zara_sales_EDA.csv",
+                   delim = ";",
+                   show_col_types = FALSE)
+
+  # Renombrar columna de ventas para trabajar más cómodo
+  df <- df %>%
+    rename(
+      sales     = `Sales Volume`,  # unidades vendidas
+      promotion = Promotion        # promoción Yes/No
+    )
+  end.rcode-->
 
   <!-- CABECERA DE FASE -->
   <div class="phase-header">
@@ -182,7 +136,13 @@
           </p>
 
           <!-- HISTOGRAMA PRECIOS -->
-<div class="chunk" id="unnamed-chunk-1"><div class="rimage default"><img src="figure/unnamed-chunk-1-1.png" alt="plot of chunk unnamed-chunk-1" class="plot" /></div></div>
+          <!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
+          ggplot(df, aes(x = price)) +
+            geom_histogram(bins = 30) +
+            labs(title = "Distribucion de precios",
+                 x = "Precio",
+                 y = "Frecuencia")
+          end.rcode-->
 
           <p>
             Esta concentración en precios medios encaja con la imagen habitual de Zara: moda actual,
@@ -201,7 +161,13 @@
           </p>
 
           <!-- HISTOGRAMA VENTAS -->
-<div class="chunk" id="unnamed-chunk-2"><div class="rimage default"><img src="figure/unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2" class="plot" /></div></div>
+          <!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
+          ggplot(df, aes(x = sales)) +
+            geom_histogram(bins = 30) +
+            labs(title = "Distribucion de ventas",
+                 x = "Ventas",
+                 y = "Frecuencia")
+          end.rcode-->
 
           <p>
             Este comportamiento tiene implicaciones importantes: la media de ventas puede ser
@@ -221,7 +187,13 @@
           </p>
 
           <!-- BARRAS SECCION -->
-<div class="chunk" id="unnamed-chunk-3"><div class="rimage default"><img src="figure/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3" class="plot" /></div></div>
+          <!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
+          ggplot(df, aes(x = section)) +
+            geom_bar() +
+            labs(title = "Numero de productos por seccion",
+                 x = "Seccion",
+                 y = "Cantidad")
+          end.rcode-->
 
           <p>
             Si una sección domina claramente el catálogo, puede interpretarse como una apuesta
@@ -238,7 +210,13 @@
           </p>
 
           <!-- BARRAS TEMPORADA -->
-<div class="chunk" id="unnamed-chunk-4"><div class="rimage default"><img src="figure/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4" class="plot" /></div></div>
+          <!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
+          ggplot(df, aes(x = season)) +
+            geom_bar() +
+            labs(title = "Numero de productos por temporada",
+                 x = "Temporada",
+                 y = "Cantidad")
+          end.rcode-->
 
           <p>
             Conocer este reparto ayuda a planificar mejor la entrada de nuevas colecciones, ajustar
@@ -268,7 +246,13 @@
           </p>
 
           <!-- SCATTER PRECIO VS VENTAS -->
-<div class="chunk" id="unnamed-chunk-5"><div class="rimage default"><img src="figure/unnamed-chunk-5-1.png" alt="plot of chunk unnamed-chunk-5" class="plot" /></div></div>
+          <!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
+          ggplot(df, aes(x = price, y = sales)) +
+            geom_point() +
+            labs(title = "Relacion entre precio y ventas",
+                 x = "Precio",
+                 y = "Ventas")
+          end.rcode-->
 
           <p>
             Este patrón sugiere una sensibilidad al precio por parte del cliente, pero también
@@ -285,7 +269,13 @@
           </p>
 
           <!-- BOX VENTAS POR SECCION -->
-<div class="chunk" id="unnamed-chunk-6"><div class="rimage default"><img src="figure/unnamed-chunk-6-1.png" alt="plot of chunk unnamed-chunk-6" class="plot" /></div></div>
+          <!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
+          ggplot(df, aes(x = section, y = sales)) +
+            geom_boxplot() +
+            labs(title = "Distribucion de ventas por seccion",
+                 x = "Seccion",
+                 y = "Ventas")
+          end.rcode-->
 
           <p>
             Este análisis es útil para plantear decisiones como reforzar determinadas líneas,
@@ -302,7 +292,13 @@
           </p>
 
           <!-- BOX VENTAS POR TEMPORADA -->
-<div class="chunk" id="unnamed-chunk-7"><div class="rimage default"><img src="figure/unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7" class="plot" /></div></div>
+          <!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
+          ggplot(df, aes(x = season, y = sales)) +
+            geom_boxplot() +
+            labs(title = "Distribucion de ventas por temporada",
+                 x = "Temporada",
+                 y = "Ventas")
+          end.rcode-->
 
           <p>
             Esta información resulta clave para la planificación del surtido, las campañas
@@ -319,7 +315,13 @@
           </p>
 
           <!-- BOX VENTAS SEGUN PROMOCION -->
-<div class="chunk" id="unnamed-chunk-8"><div class="rimage default"><img src="figure/unnamed-chunk-8-1.png" alt="plot of chunk unnamed-chunk-8" class="plot" /></div></div>
+          <!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
+          ggplot(df, aes(x = promotion, y = sales)) +
+            geom_boxplot() +
+            labs(title = "Ventas con y sin promocion",
+                 x = "Promocion",
+                 y = "Ventas")
+          end.rcode-->
 
           <p>
             Aunque el EDA no mide todavía el impacto en margen, sí confirma que las promociones

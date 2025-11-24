@@ -74,16 +74,16 @@
 
   <!-- NAV FASES -->
   <div class="phases-nav">
-    <a href="Proyecto_T1_RomanBallesteros.html" class="phase-link active">Definición del Proyecto</a>
+    <a href="index.html" class="phase-link active">Definición del Proyecto</a>
     <a href="fase2_proyecto.html" class="phase-link">Comprensión de los Datos</a>
-    <a href="fase3_proyecto.html" class="phase-link">Preparación de los Datos</a>
+    <a href="fase3_proyecto.html" class="phase-link">Análisis Exploratorio de Datos</a>
   </div>
 
   <!-- ========== HERO / PORTADA GRANDE ========== -->
   <div class="hero-container">
 
     <div class="hero-left">
-      <h1 class="hero-title">Zara Sales EDA</h1>
+      <h1 class="hero-title">Zara Sales</h1>
       <p class="hero-subtitle">Análisis Exploratorio de Ventas · Proyecto de Ciencia de Datos</p>
 
       <div class="hero-badges">
@@ -104,9 +104,9 @@
         <p class="hero-box-title">Información del proyecto</p>
         <ul class="hero-info-list">
           <li><span>👤</span> Autor: <b>Román Ballesteros Martínez</b></li>
-          <li><span>📁</span> Proyecto: Zara Sales EDA</li>
+          <li><span>📁</span> Proyecto: Zara Sales</li>
           <li><span>📅</span> Fecha: <b>2025</b></li>
-          <li><span>📊</span> Dataset: <i>Zara_sales_EDA.csv</i></li>
+          <li><span>📊</span> Dataset: <i>Zara_sales.csv</i></li>
           <li><span>🎯</span> Alcance: Fases 1–3 (EDA sin modelado)</li>
         </ul>
       </div>
@@ -145,7 +145,7 @@
         <div class="section-body">
           <p><b>Nombre completo del proyecto:</b></p>
           <p>
-            <b>Análisis Exploratorio de Ventas de Zara (Zara Sales EDA)</b>
+            <b>Ventas de Zara (Zara Sales)</b>
           </p>
           <p>
             El título resume el objetivo principal del trabajo: realizar un análisis exploratorio de los datos
@@ -247,7 +247,7 @@
           </div>
         </div>
         <div class="section-body">
-          <p><b>Dataset principal:</b> <i>Zara_sales_EDA.csv</i></p>
+          <p><b>Dataset principal:</b> <i>Zara_sales.csv</i></p>
           <p>
             Este fichero contiene información tabular donde cada fila representa un producto o una referencia
             de producto con datos asociados a sus ventas y a sus características comerciales.
@@ -344,85 +344,161 @@
         </div>
       </div>
 
-      <!-- 6. Metodología -->
+      <!-- 6. Metodología (CRISP-DM adaptado al proyecto y a las fases) -->
       <div class="section-card">
         <div class="section-header">
           <div class="section-number">6</div>
           <div>
             <p class="section-title">Metodología</p>
-            <p class="section-subtitle">Cómo se va a trabajar con los datos</p>
+            <p class="section-subtitle">Marco de trabajo basado en CRISP-DM</p>
           </div>
         </div>
+
         <div class="section-body">
-          <p><b>Enfoque general</b></p>
           <p>
-            Se seguirá un enfoque iterativo: primero se entenderá el dato disponible,
-            después se limpiará y preparará, y por último se explorarán patrones usando
-            técnicas descriptivas y de visualización.
+            La metodología del proyecto se inspira en el estándar <b>CRISP-DM (Cross-Industry Standard Process
+            for Data Mining)</b>, adaptado a las fases y entregas definidas por la asignatura. Este marco
+            permite conectar el análisis con las decisiones de negocio y avanzar de forma ordenada e iterativa.
           </p>
 
-          <p><b>¿Cómo se hará el análisis inicial de los datos?</b></p>
-          <ul>
-            <li>Lectura del dataset en R.</li>
-            <li>Inspección de estructura: tipos de columnas, número de registros, valores únicos.</li>
-            <li>Detección de valores perdidos, duplicados y posibles errores.</li>
-          </ul>
+          <p><b>1. Comprensión del negocio</b></p>
+          <p>
+            Corresponde a la Fase 1 del proyecto. Aquí se define el contexto de Zara, sus retos y las preguntas de
+            negocio que se quieren responder con los datos. El resultado es una definición clara de objetivos y
+            expectativas del proyecto.
+          </p>
 
-          <p><b>Técnicas necesarias para responder a las preguntas de negocio</b></p>
-          <ul>
-            <li>Estadística descriptiva (medidas de tendencia central y dispersión).</li>
-            <li>Tablas de frecuencia y cruces entre variables categóricas.</li>
-            <li>Visualización de datos (gráficos de barras, histogramas, boxplots, líneas).</li>
-            <li>Comparaciones entre grupos (por ejemplo, secciones, temporadas, rangos de precio).</li>
-          </ul>
+          <p><b>2. Comprensión de los datos</b></p>
+          <p>
+            Alineada con la Fase 2. Incluye la carga inicial del dataset, la revisión de su estructura y la
+            documentación de la fuente de datos. También se exploran los datos de forma preliminar para entender
+            su alcance y limitaciones.
+          </p>
 
-          <p><b>Entregables principales</b></p>
-          <ul>
-            <li>Un informe en PDF/HTML con la descripción de las fases 1–3.</li>
-            <li>Tablas y gráficos clave que resuman los hallazgos del EDA.</li>
-            <li>Listado de hipótesis e ideas para futuros proyectos de modelado.</li>
-          </ul>
+          <p><b>3. Preparación de los datos</b></p>
+          <p>
+            Relacionada con la Fase 3 (y parte de la 2.2). Consiste en limpiar y transformar el dataset para dejarlo
+            listo para el análisis: tratamiento de valores perdidos, estandarización de categorías, creación de
+            nuevas variables y selección de las más relevantes.
+          </p>
+
+          <p><b>4. Modelado</b></p>
+          <p>
+            Conecta con las Fases 4 y 5 del proyecto. A partir de los datos ya preparados, se ajustan modelos
+            de regresión y regresión logística para responder preguntas específicas, siguiendo las lecciones de
+            la asignatura y prestando especial atención a la interpretación de resultados.
+          </p>
+
+          <p><b>5. Evaluación</b></p>
+          <p>
+            En esta etapa se evalúa la utilidad de los modelos y del EDA en términos de negocio, comprobando si
+            las conclusiones son coherentes con la realidad y si ayudan a responder las preguntas planteadas.
+          </p>
+
+          <p><b>6. Implantación</b></p>
+          <p>
+            Finalmente, todos los análisis (EDA, modelos de regresión, regresión logística y segmentación)
+            se integran en un informe final, que actuará como pieza de cierre del proyecto en la segunda entrega.
+            En un entorno real, esta fase equivaldría a la puesta en producción de informes, dashboards o
+            decisiones operativas.
+          </p>
+
+          <p>
+            Este enfoque asegura que el proyecto no se limite a aplicar técnicas estadísticas de forma aislada,
+            sino que recorra un ciclo completo de ciencia de datos orientado a la toma de decisiones.
+          </p>
         </div>
       </div>
 
-      <!-- 7. Tecnología -->
+      <!-- 7. Tecnología (NUEVO DISEÑO EN TARJETAS) -->
       <div class="section-card">
         <div class="section-header">
           <div class="section-number">7</div>
           <div>
-            <p class="section-title">Tecnología</p>
-            <p class="section-subtitle">Herramientas que se van a utilizar</p>
+            <p class="section-title">Tecnología y herramientas</p>
+            <p class="section-subtitle">Ecosistema técnico del proyecto</p>
           </div>
         </div>
+
         <div class="section-body">
-          <p><b>Gestión de datos</b></p>
-          <ul>
-            <li>Ficheros CSV como formato principal de intercambio de datos.</li>
-            <li>Posible uso de bases de datos relacionales (PostgreSQL) para centralizar la información.</li>
-          </ul>
 
-          <p><b>Lenguaje de programación y librerías</b></p>
-          <ul>
-            <li><b>Lenguaje principal:</b> R.</li>
-            <li><b>Librerías:</b> 
-              <ul>
-                <li><b>readr</b>: carga de ficheros CSV.</li>
-                <li><b>dplyr</b> y <b>tidyr</b>: transformación y limpieza de datos.</li>
-                <li><b>ggplot2</b>: visualización de datos.</li>
-                <li>Otras librerías según necesidades (lubridate, stringr, etc.).</li>
+          <!-- Fila 1: Gestión de datos + Lenguajes y librerías -->
+          <div class="tech-grid">
+            <div class="tech-card">
+              <h4 class="tech-card-title">Gestión de datos</h4>
+              <p class="tech-card-text">
+                La información del proyecto se gestionará principalmente en formato tabular y en bases de datos
+                relacionales, lo que facilita su trazabilidad y posterior explotación.
+              </p>
+              <ul class="tech-list">
+                <li>Ficheros <b>CSV</b> como formato principal de intercambio de datos.</li>
+                <li>Posible uso de bases de datos relacionales <b>PostgreSQL</b> para centralizar la información.</li>
+                <li>Integración posterior con herramientas de visualización si fuera necesario.</li>
               </ul>
-            </li>
-          </ul>
+            </div>
 
-          <p><b>Plataforma de desarrollo</b></p>
-          <ul>
-            <li>RStudio (Cloud) como entorno principal de trabajo.</li>
-          </ul>
+            <div class="tech-card">
+              <h4 class="tech-card-title">Lenguajes y librerías</h4>
+              <p class="tech-card-text">
+                El núcleo del análisis se implementará en <b>R</b>, apoyado por un pequeño stack web
+                (HTML, CSS, JavaScript) para la presentación del informe.
+              </p>
 
-          <p><b>Control de versiones</b></p>
-          <ul>
-            <li>Git + GitHub (opcional) para mantener un historial del código y del informe.</li>
-          </ul>
+              <div class="tech-icons-row">
+                <div class="tech-icon-box">
+                  <!-- sustituye src por la ruta de tus iconos si los tienes -->
+                  <span class="tech-icon-text">R</span>
+                  <span class="tech-icon-label">R</span>
+                </div>
+                <div class="tech-icon-box">
+                  <span class="tech-icon-text">Py</span>
+                  <span class="tech-icon-label">Python (puntual)</span>
+                </div>
+                <div class="tech-icon-box">
+                  <span class="tech-icon-text">HTML</span>
+                  <span class="tech-icon-label">HTML</span>
+                </div>
+                <div class="tech-icon-box">
+                  <span class="tech-icon-text">CSS</span>
+                  <span class="tech-icon-label">CSS</span>
+                </div>
+                <div class="tech-icon-box">
+                  <span class="tech-icon-text">JS</span>
+                  <span class="tech-icon-label">JavaScript</span>
+                </div>
+              </div>
+
+              <ul class="tech-list">
+                <li><b>Lenguaje principal:</b> R.</li>
+                <li><b>readr</b>: carga eficiente de ficheros CSV.</li>
+                <li><b>dplyr</b> y <b>tidyr</b>: transformación, filtrado y limpieza de datos.</li>
+                <li><b>ggplot2</b>: visualización de datos y generación de gráficos para el EDA.</li>
+                <li>Otras librerías según necesidades: <i>lubridate</i>, <i>stringr</i>, etc.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Fila 2: Plataforma + Control de versiones -->
+          <div class="tech-grid tech-grid-bottom">
+            <div class="tech-card">
+              <h4 class="tech-card-title">Plataforma de desarrollo</h4>
+              <ul class="tech-list">
+                <li><b>RStudio (Cloud)</b> como entorno principal de trabajo.</li>
+                <li>Ejecutar y depurar scripts de R, gestionar proyectos y exportar informes.</li>
+                <li>Integración con knitR / RMarkdown para generar salidas HTML y PDF.</li>
+              </ul>
+            </div>
+
+            <div class="tech-card">
+              <h4 class="tech-card-title">Control de versiones</h4>
+              <ul class="tech-list">
+                <li><b>Git</b> para mantener un historial del código y del informe.</li>
+                <li><b>GitHub : </b>https://balles1316.github.io/Zara-Sales-EDA/</li>
+                <li>Posibilidad de registrar issues y cambios entre la primera y la segunda entrega.</li>
+              </ul>
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -442,7 +518,7 @@
             <li>Documentación oficial de R y del ecosistema <i>tidyverse</i>.</li>
             <li>Manual y recursos de buenas prácticas de modelado y EDA.</li>
             <li>Documentación sobre diseño de bases de datos relacionales y SQL.</li>
-            <li>Descripción y posible documentación pública de la fuente del dataset <i>Zara_sales_EDA</i> (por ejemplo, Kaggle).</li>
+            <li>Metodología <b>CRISP-DM</b> y documentación pública del dataset <i>Zara_sales_EDA</i> (por ejemplo, Kaggle).</li>
           </ul>
         </div>
       </div>
