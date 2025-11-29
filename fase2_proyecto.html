@@ -67,6 +67,45 @@
   <meta charset="UTF-8">
   <title>Comprensión de los Datos</title>
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Estilo para las tarjetas de consultas y resultados -->
+  <style>
+    .sql-card {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 14px 18px;
+      border-radius: 12px;
+      margin: 16px 0;
+      font-size: 13px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+      border: 1px solid #1e293b;
+    }
+
+    .sql-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #f8fafc;
+    }
+
+    .result-card {
+      background: #ffffff;
+      padding: 14px 18px;
+      border-radius: 12px;
+      margin-top: 8px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+      border: 1px solid #e2e8f0;
+    }
+
+    .result-card table {
+      width: 100%;
+      font-size: 13px;
+    }
+
+    .result-card caption {
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+  </style>
 </head>
 
 <body>
@@ -94,7 +133,7 @@
       </div>
 
       <p class="hero-description">
-        En esta fase se estudia el dataset <i>Zara_sales_EDA.csv</i> y su versión en base de datos
+        En esta fase se estudia el dataset <i>Zara_sales.csv</i> y su versión en base de datos
         para entender qué información contiene, en qué estado se encuentra y qué primeras
         señales ofrece sobre el comportamiento de las ventas.
       </p>
@@ -105,8 +144,8 @@
         <p class="hero-box-title">Resumen de la fase</p>
         <ul class="hero-info-list">
           <li><span>👤</span> Autor: <b>Román Ballesteros Martínez</b></li>
-          <li><span>🗄️</span> BD: <b>PostgreSQL (192.168.1.157)</b></li>
-          <li><span>📊</span> Dataset: <b>Zara_sales_EDA.csv</b></li>
+          <li><span>🗄️</span> BD: <b>PostgreSQL (192.168.1.194)</b></li>
+          <li><span>📊</span> Dataset: <b>Zara_sales.csv</b></li>
           <li><span>🔍</span> Trabajo: BD + estructura + calidad del dato</li>
           <li><span>📈</span> Resultado: dataset listo para el EDA</li>
         </ul>
@@ -116,18 +155,8 @@
   </div>
   <!-- ========== FIN HERO ========== -->
 
-  <!-- Cabecera de Fase 2 -->
-  <div class="phase-header">
-    <p class="phase-title">Comprensión de los Datos</p>
-    <p class="phase-subtitle">
-      ¿Qué información contiene el dataset? ¿Cómo está organizado y qué calidad tiene?
-    </p>
-    <div class="phase-badges">
-      <span class="phase-badge">Bases de datos</span>
-      <span class="phase-badge">Estructura</span>
-      <span class="phase-badge">Calidad del dato</span>
-    </div>
-  </div>
+  <!-- ========= CHUNK DE SETUP (R OCULTO) ========= -->
+
 
   <!-- ========== CONTENIDO PRINCIPAL ========== -->
   <div class="layout">
@@ -139,7 +168,7 @@
           <div class="section-number">1</div>
           <div>
             <p class="section-title">Trabajo con bases de datos</p>
-            <p class="section-subtitle">PostgreSQL en máquina remota 192.168.1.157</p>
+            <p class="section-subtitle">PostgreSQL en máquina remota 192.168.1.194</p>
           </div>
         </div>
 
@@ -150,7 +179,7 @@
             con el proyecto y obtener una primera visión del comportamiento comercial.
           </p>
 
-          <p><b>Esquema de la tabla <code>zara_sales</code>:</b></p>
+          <p><b>Esquema lógico de la tabla <code>zara_sales</code>:</b></p>
 
           <table class="timeline-table">
             <tr><th>Columna</th><th>Tipo</th><th>Descripción</th></tr>
@@ -167,80 +196,329 @@
 
           <p><b>Conexión desde R:</b></p>
           <pre><code>
-con <- dbConnect(
- Postgres(),
- host="192.168.1.194",
- port=5432,
- dbname="zara_db",
- user="postgres",
- password="passw0rd!"
+con <- DBI::dbConnect(
+  RPostgres::Postgres(),
+  host   = "192.168.1.194",
+  port   = 5432,
+  dbname = "zara_db",
+  user   = "postgres",
+  password = "passw0rd!"
 )
           </code></pre>
-<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl def">(DBI)</span>
-<span class="hl kwd">library</span><span class="hl def">(RPostgres)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in library(RPostgres): there is no package called 'RPostgres'
-</pre></div>
-<div class="source"><pre class="knitr r"><span class="hl def">con</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">dbConnect</span><span class="hl def">(</span>
- <span class="hl kwd">Postgres</span><span class="hl def">(),</span>
- <span class="hl kwc">host</span><span class="hl def">=</span><span class="hl sng">&quot;192.168.1.194&quot;</span><span class="hl def">,</span>
- <span class="hl kwc">port</span><span class="hl def">=</span><span class="hl num">5432</span><span class="hl def">,</span>
- <span class="hl kwc">dbname</span><span class="hl def">=</span><span class="hl sng">&quot;zara_db&quot;</span><span class="hl def">,</span>
- <span class="hl kwc">user</span><span class="hl def">=</span><span class="hl sng">&quot;postgres&quot;</span><span class="hl def">,</span>
- <span class="hl kwc">password</span><span class="hl def">=</span><span class="hl sng">&quot;passw0rd!&quot;</span>
-<span class="hl def">)</span>
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in h(simpleError(msg, call)): error in evaluating the argument 'drv' in selecting a method for function 'dbConnect': could not find function "Postgres"
-</pre></div>
-</div></div>
 
-          <p><b>Consultas SQL realizadas:</b></p>
+          <p><b>Consultas SQL realizadas y resultados:</b></p>
 
-          <pre><code>
--- 1. Productos por sección
+          <!-- 1) Productos por sección -->
+          <div class="sql-card">
+            <div class="sql-title">1) Productos por sección</div>
+            <code>
 SELECT section, COUNT(*) AS num_productos
 FROM zara_sales
 GROUP BY section;
+            </code>
+          </div>
 
--- 2. Ventas por temporada
-SELECT season, AVG(sales), SUM(sales)
+<div class="result-card"><table class="table">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> section </th>
+   <th style="text-align:right;"> num_productos </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> MAN </td>
+   <td style="text-align:right;"> 6998 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> WOMAN </td>
+   <td style="text-align:right;"> 13254 </td>
+  </tr>
+</tbody>
+</table></div>
+
+          <!-- 2) Ventas por temporada -->
+          <div class="sql-card">
+            <div class="sql-title">2) Ventas por temporada</div>
+            <code>
+SELECT season,
+       AVG(sales) AS avg_sales,
+       SUM(sales) AS total_sales
 FROM zara_sales
 GROUP BY season;
+            </code>
+          </div>
 
--- 3. Ventas por rangos de precio
+<div class="result-card"><table class="table">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> season </th>
+   <th style="text-align:right;"> avg_sales </th>
+   <th style="text-align:right;"> total_sales </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Winter </td>
+   <td style="text-align:right;"> 1174.613 </td>
+   <td style="text-align:right;"> 6042207 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Summer </td>
+   <td style="text-align:right;"> 1184.589 </td>
+   <td style="text-align:right;"> 3442417 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Autumn </td>
+   <td style="text-align:right;"> 1042.820 </td>
+   <td style="text-align:right;"> 7993214 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Spring </td>
+   <td style="text-align:right;"> 1046.223 </td>
+   <td style="text-align:right;"> 4746716 </td>
+  </tr>
+</tbody>
+</table></div>
+
+          <!-- 3) Ventas por rangos de precio -->
+          <div class="sql-card">
+            <div class="sql-title">3) Ventas por rangos de precio</div>
+            <code>
 SELECT CASE
-  WHEN price < 20 THEN 'Bajo'
+  WHEN price &lt; 20 THEN 'Bajo'
   WHEN price BETWEEN 20 AND 39.99 THEN 'Medio'
   ELSE 'Alto' END AS rango_precio,
-  AVG(sales), COUNT(*)
+  AVG(sales) AS avg_sales,
+  COUNT(*) AS num_productos
 FROM zara_sales
 GROUP BY rango_precio;
+            </code>
+          </div>
 
--- 4. Promoción vs ventas
-SELECT promotion, AVG(sales), SUM(sales)
+<div class="result-card"><table class="table">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> rango_precio </th>
+   <th style="text-align:right;"> avg_sales </th>
+   <th style="text-align:right;"> num_productos </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Alto </td>
+   <td style="text-align:right;"> 1097.4 </td>
+   <td style="text-align:right;"> 20252 </td>
+  </tr>
+</tbody>
+</table></div>
+
+          <!-- 4) Promoción vs ventas -->
+          <div class="sql-card">
+            <div class="sql-title">4) Promoción vs ventas</div>
+            <code>
+SELECT promotion,
+       AVG(sales) AS avg_sales,
+       SUM(sales) AS total_sales
 FROM zara_sales
 GROUP BY promotion;
+            </code>
+          </div>
 
--- 5. Ventas por origen
-SELECT origin, AVG(sales), SUM(sales)
+<div class="result-card"><table class="table">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> promotion </th>
+   <th style="text-align:right;"> avg_sales </th>
+   <th style="text-align:right;"> total_sales </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> No </td>
+   <td style="text-align:right;"> 872.3771 </td>
+   <td style="text-align:right;"> 10304518 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Yes </td>
+   <td style="text-align:right;"> 1412.3265 </td>
+   <td style="text-align:right;"> 11920036 </td>
+  </tr>
+</tbody>
+</table></div>
+
+          <!-- 5) Ventas por origen -->
+          <div class="sql-card">
+            <div class="sql-title">5) Ventas por origen</div>
+            <code>
+SELECT origin,
+       AVG(sales) AS avg_sales,
+       SUM(sales) AS total_sales
 FROM zara_sales
 GROUP BY origin;
+            </code>
+          </div>
 
--- 6. Ventas por posición en tienda
-SELECT product_position, AVG(sales), COUNT(*)
+<div class="result-card"><table class="table">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> origin </th>
+   <th style="text-align:right;"> avg_sales </th>
+   <th style="text-align:right;"> total_sales </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Bangladesh </td>
+   <td style="text-align:right;"> 1087.658 </td>
+   <td style="text-align:right;"> 3934058 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Cambodia </td>
+   <td style="text-align:right;"> 1091.422 </td>
+   <td style="text-align:right;"> 1070685 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Portugal </td>
+   <td style="text-align:right;"> 1094.743 </td>
+   <td style="text-align:right;"> 1554535 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Turkey </td>
+   <td style="text-align:right;"> 1091.313 </td>
+   <td style="text-align:right;"> 2700999 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> China </td>
+   <td style="text-align:right;"> 1106.441 </td>
+   <td style="text-align:right;"> 4454532 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Spain </td>
+   <td style="text-align:right;"> 1102.844 </td>
+   <td style="text-align:right;"> 1376349 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Argentina </td>
+   <td style="text-align:right;"> 1096.514 </td>
+   <td style="text-align:right;"> 196276 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> India </td>
+   <td style="text-align:right;"> 1096.032 </td>
+   <td style="text-align:right;"> 2228233 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Vietnam </td>
+   <td style="text-align:right;"> 1094.718 </td>
+   <td style="text-align:right;"> 1335556 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Pakistan </td>
+   <td style="text-align:right;"> 1095.286 </td>
+   <td style="text-align:right;"> 662648 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Brazil </td>
+   <td style="text-align:right;"> 1127.155 </td>
+   <td style="text-align:right;"> 896088 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Morocco </td>
+   <td style="text-align:right;"> 1097.759 </td>
+   <td style="text-align:right;"> 1814595 </td>
+  </tr>
+</tbody>
+</table></div>
+
+          <!-- 6) Ventas por posición en tienda -->
+          <div class="sql-card">
+            <div class="sql-title">6) Ventas por posición en tienda</div>
+            <code>
+SELECT product_position,
+       AVG(sales) AS avg_sales,
+       COUNT(*) AS num_productos
 FROM zara_sales
 GROUP BY product_position;
+            </code>
+          </div>
 
--- 7. Ventas por terms (colección)
-SELECT terms, AVG(sales), SUM(sales)
+<div class="result-card"><table class="table">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> product_position </th>
+   <th style="text-align:right;"> avg_sales </th>
+   <th style="text-align:right;"> num_productos </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Front of Store </td>
+   <td style="text-align:right;"> 1103.361 </td>
+   <td style="text-align:right;"> 5651 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Aisle </td>
+   <td style="text-align:right;"> 1090.427 </td>
+   <td style="text-align:right;"> 7810 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> End-cap </td>
+   <td style="text-align:right;"> 1100.460 </td>
+   <td style="text-align:right;"> 6791 </td>
+  </tr>
+</tbody>
+</table></div>
+
+          <!-- 7) Ventas por colección (terms) -->
+          <div class="sql-card">
+            <div class="sql-title">7) Ventas por colección (terms)</div>
+            <code>
+SELECT terms,
+       AVG(sales) AS avg_sales,
+       SUM(sales) AS total_sales
 FROM zara_sales
 GROUP BY terms;
-          </code></pre>
+            </code>
+          </div>
 
-          <p>
-            Estas consultas aportan una visión inicial de qué secciones, temporadas, orígenes,
-            colecciones y posiciones en tienda presentan mejor rendimiento comercial.
-          </p>
+<div class="result-card"><table class="table">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> terms </th>
+   <th style="text-align:right;"> avg_sales </th>
+   <th style="text-align:right;"> total_sales </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> shoes </td>
+   <td style="text-align:right;"> 1089.090 </td>
+   <td style="text-align:right;"> 2676982 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> t-shirts </td>
+   <td style="text-align:right;"> 1088.200 </td>
+   <td style="text-align:right;"> 2879378 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> sweaters </td>
+   <td style="text-align:right;"> 1104.926 </td>
+   <td style="text-align:right;"> 3598743 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> jeans </td>
+   <td style="text-align:right;"> 1094.549 </td>
+   <td style="text-align:right;"> 721308 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> jackets </td>
+   <td style="text-align:right;"> 1099.372 </td>
+   <td style="text-align:right;"> 12348143 </td>
+  </tr>
+</tbody>
+</table></div>
+
         </div>
       </div>
 
@@ -249,16 +527,12 @@ GROUP BY terms;
         <div class="section-header">
           <div class="section-number">2</div>
           <div>
-            <p class="section-title">Descripción general del dataset (CSV)</p>
+            <p class="section-title">Descripción general del dataset</p>
             <p class="section-subtitle">Contexto y contenido básico</p>
           </div>
         </div>
 
         <div class="section-body">
-          <p>
-            El fichero <b>Zara_sales_EDA.csv</b> contiene un registro por producto con sus
-            características comerciales y su volumen de ventas.
-          </p>
 
           <p><b>Variables principales del dataset:</b></p>
 
@@ -332,6 +606,9 @@ GROUP BY terms;
 
     </div>
   </div>
+
+  <!-- Cerrar conexión al final del documento -->
+
 
 </div>
 

@@ -32,7 +32,7 @@
 
       <p class="hero-description">
         En esta fase se analiza en profundidad el comportamiento de los productos y sus ventas
-        en el dataset <i>Zara_sales_EDA.csv</i>, con el objetivo de entender qué se vende,
+        en el dataset <i>Zara_sales.csv</i>, con el objetivo de entender qué se vende,
         a qué precio y en qué contexto (sección, temporada y promoción), y detectar patrones
         relevantes para la toma de decisiones.
       </p>
@@ -61,7 +61,7 @@
   library(ggplot2)
 
   # Cargar el CSV con separador ';'
-  df <- read_delim("Zara_sales_EDA.csv",
+  df <- read_delim("Zara_sales.csv",
                    delim = ";",
                    show_col_types = FALSE)
 

@@ -5,6 +5,45 @@
   <meta charset="UTF-8">
   <title>Comprensión de los Datos</title>
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Estilo para las tarjetas de consultas y resultados -->
+  <style>
+    .sql-card {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 14px 18px;
+      border-radius: 12px;
+      margin: 16px 0;
+      font-size: 13px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+      border: 1px solid #1e293b;
+    }
+
+    .sql-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #f8fafc;
+    }
+
+    .result-card {
+      background: #ffffff;
+      padding: 14px 18px;
+      border-radius: 12px;
+      margin-top: 8px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+      border: 1px solid #e2e8f0;
+    }
+
+    .result-card table {
+      width: 100%;
+      font-size: 13px;
+    }
+
+    .result-card caption {
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+  </style>
 </head>
 
 <body>
@@ -32,7 +71,7 @@
       </div>
 
       <p class="hero-description">
-        En esta fase se estudia el dataset <i>Zara_sales_EDA.csv</i> y su versión en base de datos
+        En esta fase se estudia el dataset <i>Zara_sales.csv</i> y su versión en base de datos
         para entender qué información contiene, en qué estado se encuentra y qué primeras
         señales ofrece sobre el comportamiento de las ventas.
       </p>
@@ -43,8 +82,8 @@
         <p class="hero-box-title">Resumen de la fase</p>
         <ul class="hero-info-list">
           <li><span>👤</span> Autor: <b>Román Ballesteros Martínez</b></li>
-          <li><span>🗄️</span> BD: <b>PostgreSQL (192.168.1.157)</b></li>
-          <li><span>📊</span> Dataset: <b>Zara_sales_EDA.csv</b></li>
+          <li><span>🗄️</span> BD: <b>PostgreSQL (192.168.1.194)</b></li>
+          <li><span>📊</span> Dataset: <b>Zara_sales.csv</b></li>
           <li><span>🔍</span> Trabajo: BD + estructura + calidad del dato</li>
           <li><span>📈</span> Resultado: dataset listo para el EDA</li>
         </ul>
@@ -54,18 +93,44 @@
   </div>
   <!-- ========== FIN HERO ========== -->
 
-  <!-- Cabecera de Fase 2 -->
-  <div class="phase-header">
-    <p class="phase-title">Comprensión de los Datos</p>
-    <p class="phase-subtitle">
-      ¿Qué información contiene el dataset? ¿Cómo está organizado y qué calidad tiene?
-    </p>
-    <div class="phase-badges">
-      <span class="phase-badge">Bases de datos</span>
-      <span class="phase-badge">Estructura</span>
-      <span class="phase-badge">Calidad del dato</span>
-    </div>
-  </div>
+  <!-- ========= CHUNK DE SETUP (R OCULTO) ========= -->
+  <!--begin.rcode setup, echo=FALSE, message=FALSE, warning=FALSE
+  library(DBI)
+  library(RPostgres)
+  library(readr)
+  library(dplyr)
+  library(knitr)
+
+  # Conexión a PostgreSQL
+  con <- dbConnect(
+    RPostgres::Postgres(),
+    host   = "192.168.1.194",
+    port   = 5432,
+    dbname = "zara_db",
+    user   = "postgres",
+    password = "passw0rd!"
+  )
+
+  # Carga del CSV (ajusta la ruta si hace falta)
+  ventas <- read_csv2("Zara_sales.csv", show_col_types = FALSE)
+
+  # Adaptar nombres de columnas del CSV a los que usaremos en SQL
+  ventas <- ventas |>
+    rename(
+      product_id        = `Product ID`,
+      product_position  = `Product Position`,
+      promotion         = Promotion,
+      sales             = `Sales Volume`,
+      price             = price,
+      section           = section,
+      season            = season,
+      terms             = terms,
+      origin            = origin
+    )
+
+  # Cargar datos en la tabla zara_sales (sobrescribe para asegurar consistencia)
+  dbWriteTable(con, "zara_sales", ventas, overwrite = TRUE)
+  end.rcode-->
 
   <!-- ========== CONTENIDO PRINCIPAL ========== -->
   <div class="layout">
@@ -77,7 +142,7 @@
           <div class="section-number">1</div>
           <div>
             <p class="section-title">Trabajo con bases de datos</p>
-            <p class="section-subtitle">PostgreSQL en máquina remota 192.168.1.157</p>
+            <p class="section-subtitle">PostgreSQL en máquina remota 192.168.1.194</p>
           </div>
         </div>
 
@@ -88,7 +153,7 @@
             con el proyecto y obtener una primera visión del comportamiento comercial.
           </p>
 
-          <p><b>Esquema de la tabla <code>zara_sales</code>:</b></p>
+          <p><b>Esquema lógico de la tabla <code>zara_sales</code>:</b></p>
 
           <table class="timeline-table">
             <tr><th>Columna</th><th>Tipo</th><th>Descripción</th></tr>
@@ -105,76 +170,231 @@
 
           <p><b>Conexión desde R:</b></p>
           <pre><code>
-con <- dbConnect(
- Postgres(),
- host="192.168.1.194",
- port=5432,
- dbname="zara_db",
- user="postgres",
- password="passw0rd!"
+con <- DBI::dbConnect(
+  RPostgres::Postgres(),
+  host   = "192.168.1.194",
+  port   = 5432,
+  dbname = "zara_db",
+  user   = "postgres",
+  password = "passw0rd!"
 )
           </code></pre>
-<!--begin.rcode
-library(DBI)
-library(RPostgres)
 
-con <- dbConnect(
- Postgres(),
- host="192.168.1.194",
- port=5432,
- dbname="zara_db",
- user="postgres",
- password="passw0rd!"
-)
-end.rcode-->
+          <p><b>Consultas SQL realizadas y resultados:</b></p>
 
-          <p><b>Consultas SQL realizadas:</b></p>
-
-          <pre><code>
--- 1. Productos por sección
+          <!-- 1) Productos por sección -->
+          <div class="sql-card">
+            <div class="sql-title">1) Productos por sección</div>
+            <code>
 SELECT section, COUNT(*) AS num_productos
 FROM zara_sales
 GROUP BY section;
+            </code>
+          </div>
 
--- 2. Ventas por temporada
-SELECT season, AVG(sales), SUM(sales)
+          <!--begin.rcode echo=FALSE, results='asis'
+          res1 <- dbGetQuery(con, "
+            SELECT section, COUNT(*) AS num_productos
+            FROM zara_sales
+            GROUP BY section;
+          ")
+
+          html <- paste0(
+            '<div class="result-card">',
+            kable(res1, format="html", table.attr='class="table"'),
+            '</div>'
+          )
+
+          cat(html)
+          end.rcode-->
+
+          <!-- 2) Ventas por temporada -->
+          <div class="sql-card">
+            <div class="sql-title">2) Ventas por temporada</div>
+            <code>
+SELECT season,
+       AVG(sales) AS avg_sales,
+       SUM(sales) AS total_sales
 FROM zara_sales
 GROUP BY season;
+            </code>
+          </div>
 
--- 3. Ventas por rangos de precio
+          <!--begin.rcode echo=FALSE, results='asis'
+          res2 <- dbGetQuery(con, "
+            SELECT season,
+                   AVG(sales) AS avg_sales,
+                   SUM(sales) AS total_sales
+            FROM zara_sales
+            GROUP BY season;
+          ")
+
+          html <- paste0(
+            '<div class="result-card">',
+            kable(res2, format="html", table.attr='class="table"'),
+            '</div>'
+          )
+
+          cat(html)
+          end.rcode-->
+
+          <!-- 3) Ventas por rangos de precio -->
+          <div class="sql-card">
+            <div class="sql-title">3) Ventas por rangos de precio</div>
+            <code>
 SELECT CASE
-  WHEN price < 20 THEN 'Bajo'
+  WHEN price &lt; 20 THEN 'Bajo'
   WHEN price BETWEEN 20 AND 39.99 THEN 'Medio'
   ELSE 'Alto' END AS rango_precio,
-  AVG(sales), COUNT(*)
+  AVG(sales) AS avg_sales,
+  COUNT(*) AS num_productos
 FROM zara_sales
 GROUP BY rango_precio;
+            </code>
+          </div>
 
--- 4. Promoción vs ventas
-SELECT promotion, AVG(sales), SUM(sales)
+          <!--begin.rcode echo=FALSE, results='asis'
+          res3 <- dbGetQuery(con, "
+            SELECT CASE
+              WHEN price < 20 THEN 'Bajo'
+              WHEN price BETWEEN 20 AND 39.99 THEN 'Medio'
+              ELSE 'Alto'
+            END AS rango_precio,
+            AVG(sales) AS avg_sales,
+            COUNT(*) AS num_productos
+            FROM zara_sales
+            GROUP BY rango_precio;
+          ")
+
+          html <- paste0(
+            '<div class="result-card">',
+            kable(res3, format="html", table.attr='class="table"'),
+            '</div>'
+          )
+
+          cat(html)
+          end.rcode-->
+
+          <!-- 4) Promoción vs ventas -->
+          <div class="sql-card">
+            <div class="sql-title">4) Promoción vs ventas</div>
+            <code>
+SELECT promotion,
+       AVG(sales) AS avg_sales,
+       SUM(sales) AS total_sales
 FROM zara_sales
 GROUP BY promotion;
+            </code>
+          </div>
 
--- 5. Ventas por origen
-SELECT origin, AVG(sales), SUM(sales)
+          <!--begin.rcode echo=FALSE, results='asis'
+          res4 <- dbGetQuery(con, "
+            SELECT promotion,
+                   AVG(sales) AS avg_sales,
+                   SUM(sales) AS total_sales
+            FROM zara_sales
+            GROUP BY promotion;
+          ")
+
+          html <- paste0(
+            '<div class="result-card">',
+            kable(res4, format="html", table.attr='class="table"'),
+            '</div>'
+          )
+
+          cat(html)
+          end.rcode-->
+
+          <!-- 5) Ventas por origen -->
+          <div class="sql-card">
+            <div class="sql-title">5) Ventas por origen</div>
+            <code>
+SELECT origin,
+       AVG(sales) AS avg_sales,
+       SUM(sales) AS total_sales
 FROM zara_sales
 GROUP BY origin;
+            </code>
+          </div>
 
--- 6. Ventas por posición en tienda
-SELECT product_position, AVG(sales), COUNT(*)
+          <!--begin.rcode echo=FALSE, results='asis'
+          res5 <- dbGetQuery(con, "
+            SELECT origin,
+                   AVG(sales) AS avg_sales,
+                   SUM(sales) AS total_sales
+            FROM zara_sales
+            GROUP BY origin;
+          ")
+
+          html <- paste0(
+            '<div class="result-card">',
+            kable(res5, format="html", table.attr='class="table"'),
+            '</div>'
+          )
+
+          cat(html)
+          end.rcode-->
+
+          <!-- 6) Ventas por posición en tienda -->
+          <div class="sql-card">
+            <div class="sql-title">6) Ventas por posición en tienda</div>
+            <code>
+SELECT product_position,
+       AVG(sales) AS avg_sales,
+       COUNT(*) AS num_productos
 FROM zara_sales
 GROUP BY product_position;
+            </code>
+          </div>
 
--- 7. Ventas por terms (colección)
-SELECT terms, AVG(sales), SUM(sales)
+          <!--begin.rcode echo=FALSE, results='asis'
+          res6 <- dbGetQuery(con, "
+            SELECT product_position,
+                   AVG(sales) AS avg_sales,
+                   COUNT(*) AS num_productos
+            FROM zara_sales
+            GROUP BY product_position;
+          ")
+
+          html <- paste0(
+            '<div class="result-card">',
+            kable(res6, format="html", table.attr='class="table"'),
+            '</div>'
+          )
+
+          cat(html)
+          end.rcode-->
+
+          <!-- 7) Ventas por colección (terms) -->
+          <div class="sql-card">
+            <div class="sql-title">7) Ventas por colección (terms)</div>
+            <code>
+SELECT terms,
+       AVG(sales) AS avg_sales,
+       SUM(sales) AS total_sales
 FROM zara_sales
 GROUP BY terms;
-          </code></pre>
+            </code>
+          </div>
 
-          <p>
-            Estas consultas aportan una visión inicial de qué secciones, temporadas, orígenes,
-            colecciones y posiciones en tienda presentan mejor rendimiento comercial.
-          </p>
+          <!--begin.rcode echo=FALSE, results='asis'
+          res7 <- dbGetQuery(con, "
+            SELECT terms,
+                   AVG(sales) AS avg_sales,
+                   SUM(sales) AS total_sales
+            FROM zara_sales
+            GROUP BY terms;
+          ")
+
+          html <- paste0(
+            '<div class="result-card">',
+            kable(res7, format="html", table.attr='class="table"'),
+            '</div>'
+          )
+
+          cat(html)
+          end.rcode-->
+
         </div>
       </div>
 
@@ -183,16 +403,12 @@ GROUP BY terms;
         <div class="section-header">
           <div class="section-number">2</div>
           <div>
-            <p class="section-title">Descripción general del dataset (CSV)</p>
+            <p class="section-title">Descripción general del dataset</p>
             <p class="section-subtitle">Contexto y contenido básico</p>
           </div>
         </div>
 
         <div class="section-body">
-          <p>
-            El fichero <b>Zara_sales_EDA.csv</b> contiene un registro por producto con sus
-            características comerciales y su volumen de ventas.
-          </p>
 
           <p><b>Variables principales del dataset:</b></p>
 
@@ -266,6 +482,11 @@ GROUP BY terms;
 
     </div>
   </div>
+
+  <!-- Cerrar conexión al final del documento -->
+  <!--begin.rcode echo=FALSE
+  DBI::dbDisconnect(con)
+  end.rcode-->
 
 </div>
 
