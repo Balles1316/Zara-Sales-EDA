@@ -58,7 +58,7 @@
   <!-- ========== FIN HERO ========== -->
 
   <!-- ========== SETUP: CARGA DE DATOS (CÓDIGO OCULTO) ========== -->
-  <!--begin.rcode setup, include=FALSE
+  <!--begin.rcode setup_fase3, include=FALSE
   library(readr)
   library(dplyr)
   library(ggplot2)
@@ -139,12 +139,14 @@
           </p>
 
           <!-- HISTOGRAMA PRECIOS -->
-          <!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
-          ggplot(df, aes(x = price)) +
+          <!--begin.rcode del, echo=FALSE, message=FALSE, warning=FALSE
+          adios1 <- ggplot(df, aes(x = price)) +
             geom_histogram(bins = 30) +
             labs(title = "Distribucion de precios",
                  x = "Precio",
                  y = "Frecuencia")
+                 
+                 print(adios1)
           end.rcode-->
 
           <p>
@@ -164,12 +166,13 @@
           </p>
 
           <!-- HISTOGRAMA VENTAS -->
-          <!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
-          ggplot(df, aes(x = sales)) +
+          <!--begin.rcode porfa, echo=FALSE, message=FALSE, warning=FALSE
+          adios2 <- ggplot(df, aes(x = sales)) +
             geom_histogram(bins = 30) +
             labs(title = "Distribucion de ventas",
                  x = "Ventas",
                  y = "Frecuencia")
+          print(adios2)
           end.rcode-->
 
           <p>
@@ -190,12 +193,14 @@
           </p>
 
           <!-- BARRAS SECCION -->
-          <!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
-          ggplot(df, aes(x = section)) +
+          <!--begin.rcode fase333, echo=FALSE, message=FALSE, warning=FALSE
+          adios3 <- ggplot(df, aes(x = section)) +
             geom_bar() +
             labs(title = "Numero de productos por seccion",
                  x = "Seccion",
                  y = "Cantidad")
+                 
+          print(adios3)
           end.rcode-->
 
           <p>
@@ -213,12 +218,13 @@
           </p>
 
           <!-- BARRAS TEMPORADA -->
-          <!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
-          ggplot(df, aes(x = season)) +
+          <!--begin.rcode fase723, echo=FALSE, message=FALSE, warning=FALSE
+          adios4 <- ggplot(df, aes(x = season)) +
             geom_bar() +
             labs(title = "Numero de productos por temporada",
                  x = "Temporada",
                  y = "Cantidad")
+          print(adios4)
           end.rcode-->
 
           <p>
@@ -249,12 +255,13 @@
           </p>
 
           <!-- SCATTER PRECIO VS VENTAS -->
-          <!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
-          ggplot(df, aes(x = price, y = sales)) +
+          <!--begin.rcode hola123,echo=FALSE, message=FALSE, warning=FALSE
+          adios5 <- ggplot(df, aes(x = price, y = sales)) +
             geom_point() +
             labs(title = "Relacion entre precio y ventas",
                  x = "Precio",
                  y = "Ventas")
+          print(adios5)
           end.rcode-->
 
           <p>
@@ -272,12 +279,14 @@
           </p>
 
           <!-- BOX VENTAS POR SECCION -->
-          <!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
-          ggplot(df, aes(x = section, y = sales)) +
+          <!--begin.rcode adios987, echo=FALSE, message=FALSE, warning=FALSE
+          adios6 <- ggplot(df, aes(x = section, y = sales)) +
             geom_boxplot() +
             labs(title = "Distribucion de ventas por seccion",
                  x = "Seccion",
                  y = "Ventas")
+                 
+            print(adios6)
           end.rcode-->
 
           <p>
@@ -295,12 +304,13 @@
           </p>
 
           <!-- BOX VENTAS POR TEMPORADA -->
-          <!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
-          ggplot(df, aes(x = season, y = sales)) +
+          <!--begin.rcode hola4321, echo=FALSE, message=FALSE, warning=FALSE
+          adios7 <- ggplot(df, aes(x = season, y = sales)) +
             geom_boxplot() +
             labs(title = "Distribucion de ventas por temporada",
                  x = "Temporada",
                  y = "Ventas")
+          print(adios7)
           end.rcode-->
 
           <p>
@@ -318,12 +328,13 @@
           </p>
 
           <!-- BOX VENTAS SEGUN PROMOCION -->
-          <!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
-          ggplot(df, aes(x = promotion, y = sales)) +
+          <!--begin.rcode librame, echo=FALSE, message=FALSE, warning=FALSE
+          adios8 <- ggplot(df, aes(x = promotion, y = sales)) +
             geom_boxplot() +
             labs(title = "Ventas con y sin promocion",
                  x = "Promocion",
                  y = "Ventas")
+          print(adios7)
           end.rcode-->
 
           <p>

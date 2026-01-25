@@ -1,5 +1,5 @@
+<!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="UTF-8">
   <title>Fase 4 – Análisis de Regresión</title>
@@ -7,7 +7,6 @@
 </head>
 
 <body>
-
 <div class="page">
 
   <!-- NAV FASES -->
@@ -20,291 +19,324 @@
     <a href="fase6_proyecto.html" class="phase-link">Análisis de Conglomerados</a>
   </div>
 
-  <!-- ========== HERO FASE 4 ========== -->
-  <div class="hero-container">
 
-    <div class="hero-left">
-      <h1 class="hero-title">Análisis de Regresión</h1>
-      <p class="hero-subtitle">Explorar patrones, relaciones y comportamiento del catálogo</p>
+<!-- ========== HERO FASE 4 ========== -->
+<div class="hero-container">
+  <div class="hero-left">
+    <h1 class="hero-title">Análisis de Regresión</h1>
+    <p class="hero-subtitle">Regresión lineal simple multivariable aplicada al negocio</p>
 
-      <div class="hero-badges">
-        <span class="hero-badge">Román Ballesteros Martínez</span>
-        <span class="hero-badge">Análisis de Regresión</span>
-      </div>
-
-      <p class="hero-description">
-        En esta fase se analiza en profundidad el comportamiento de los productos y sus ventas
-        en el dataset <i>Zara_sales.csv</i>, con el objetivo de entender qué se vende,
-        a qué precio y en qué contexto (sección, temporada y promoción), y detectar patrones
-        relevantes para la toma de decisiones.
-      </p>
+    <div class="hero-badges">
+      <span class="hero-badge">Román Ballesteros Martínez</span>
+      <span class="hero-badge">Regresión Lineal</span>
+      <span class="hero-badge">Negocio</span>
     </div>
 
+    <p class="hero-description">
+      En esta fase se construye un modelo de regresión lineal para cuantificar el impacto
+      del precio, la promoción, la sección y la temporada sobre el volumen de ventas del
+      catálogo Zara.
+    </p>
+  </div>
+  
     <div class="hero-right">
-      <div class="hero-box">
-        <p class="hero-box-title">Resumen de la fase</p>
-        <ul class="hero-info-list">
-          <li><span>👤</span> Autor: <b>Román Ballesteros Martínez</b></li>
-          <li><span>📊</span> Variables clave: <b>precio, ventas, sección, temporada</b></li>
-          <li><span>🔍</span> Análisis univariado y bivariado</li>
-          <li><span>⚠️</span> Detección de outliers y sesgos</li>
-          <li><span>🧠</span> Conclusiones orientadas al negocio</li>
-        </ul>
-      </div>
+    <div class="hero-box">
+      <p class="hero-box-title">Resumen de la fase</p>
+      <ul class="hero-info-list">
+        <li><span>👤</span> Autor: <b>Román Ballesteros Martínez</b></li>
+        <li><span>🎯</span> Objetivo: <b>segmentación del catálogo</b></li>
+        <li><span>📊</span> Variables: <b>precio, ventas, promoción</b></li>
+        <li><span>🧩</span> Técnica: <b>k-means</b></li>
+        <li><span>🧠</span> Enfoque: <b>perfiles accionables de negocio</b></li>
+      </ul>
     </div>
-
   </div>
-  <!-- ========== FIN HERO ========== -->
 
-<!-- ========== FASE 4: ANÁLISIS DE REGRESIÓN ========== -->
-
-<div class="phase-header">
-  <p class="phase-title">Análisis de Regresión</p>
-  <p class="phase-subtitle">
-    Identificación de los factores que explican las ventas y cuantificación de su impacto.
-  </p>
-  <div class="phase-badges">
-    <span class="phase-badge">Regresión</span>
-    <span class="phase-badge">Modelado</span>
-    <span class="phase-badge">Negocio</span>
-    <span class="phase-badge">Conclusiones</span>
-  </div>
 </div>
+<!-- ========== FIN HERO ========== -->
 
-<div class="layout">
-  <div>
+<!--begin.rcode setup, include=FALSE
+library(dplyr)
+library(ggplot2)
+library(readr)
 
-    <!-- 1. PREGUNTAS DE NEGOCIO -->
-    <div class="section-card">
-      <div class="section-header">
-        <div class="section-number">1</div>
-        <div>
-          <p class="section-title">Preguntas de negocio</p>
-          <p class="section-subtitle">Qué se quiere explicar con el modelo</p>
-        </div>
-      </div>
-      <div class="section-body">
-        <p>
-          El objetivo principal del análisis de regresión es entender <b>qué factores influyen en las
-          ventas de los productos</b> y cuantificar su impacto para apoyar la toma de decisiones
-          comerciales.
-        </p>
-        <p>
-          En concreto, el modelo permite responder a las siguientes preguntas:
-        </p>
-        <ul>
-          <li>¿Cómo afectan el <b>precio</b>, la <b>promoción</b>, la <b>sección</b> y la <b>temporada</b> al volumen de ventas?</li>
-          <li>¿Hasta qué punto una subida de precio reduce las ventas?</li>
-          <li>¿Compensan las promociones la caída de ventas asociada a precios más altos?</li>
-          <li>¿Existen diferencias estructurales de ventas entre secciones y temporadas?</li>
-        </ul>
-        <p>
-          Todas estas cuestiones son adecuadas para un modelo de regresión, ya que la variable a explicar
-          (ventas) es cuantitativa y depende de múltiples factores.
-        </p>
-      </div>
-    </div>
-
-    <!-- 2. DEFINICIÓN DEL PROBLEMA -->
-    <div class="section-card">
-      <div class="section-header">
-        <div class="section-number">2</div>
-        <div>
-          <p class="section-title">Definición del problema</p>
-          <p class="section-subtitle">Relación conceptual entre variables</p>
-        </div>
-      </div>
-      <div class="section-body">
-        <p>
-          Desde una perspectiva de negocio, las <b>ventas</b> de un producto dependen tanto de su
-          <b>precio</b> como del <b>contexto comercial</b> en el que se ofrece.
-        </p>
-        <p>
-          El precio actúa como un freno o incentivo a la compra, mientras que variables como la
-          promoción, la sección o la temporada recogen decisiones estratégicas de la empresa y
-          patrones de comportamiento del consumidor.
-        </p>
-        <p>
-          El objetivo del modelo es aislar el efecto de cada uno de estos factores para entender
-          su impacto real sobre las ventas, manteniendo constantes el resto de variables.
-        </p>
-      </div>
-    </div>
-
-    <!-- 3. ANÁLISIS BIVARIADO -->
-    <div class="section-card">
-      <div class="section-header">
-        <div class="section-number">3</div>
-        <div>
-          <p class="section-title">Relación entre ventas y variables explicativas</p>
-          <p class="section-subtitle">Resultados clave del análisis previo</p>
-        </div>
-      </div>
-      <div class="section-body">
-        <p>
-          El análisis exploratorio previo mostró patrones claros que justifican el uso de un modelo
-          de regresión:
-        </p>
-        <ul>
-          <li>
-            <b>Precio y ventas</b>: existe una relación inversa; los productos más caros tienden a
-            vender menos unidades.
-          </li>
-          <li>
-            <b>Promoción</b>: los productos en promoción presentan mayores niveles de ventas.
-          </li>
-          <li>
-            <b>Sección</b>: algunas secciones concentran productos con mejor comportamiento comercial.
-          </li>
-          <li>
-            <b>Temporada</b>: se observan diferencias claras entre temporadas, reflejando estacionalidad.
-          </li>
-        </ul>
-        <p>
-          Estas relaciones sugieren que las ventas no dependen de un único factor, sino de la
-          combinación de varios elementos.
-        </p>
-      </div>
-    </div>
-
-    <!-- 4. MODELO Y TRANSFORMACIONES -->
-    <div class="section-card">
-      <div class="section-header">
-        <div class="section-number">4</div>
-        <div>
-          <p class="section-title">Modelo propuesto</p>
-          <p class="section-subtitle">Ajustes para mejorar la interpretación</p>
-        </div>
-      </div>
-      <div class="section-body">
-        <p>
-          Dado que las ventas presentan una distribución muy sesgada y con valores extremos,
-          se aplican transformaciones logarítmicas tanto a las ventas como al precio.
-        </p>
-        <p>
-          Este enfoque permite interpretar los resultados en términos porcentuales, algo mucho más
-          intuitivo desde el punto de vista del negocio.
-        </p>
-        <p>
-          El modelo incluye:
-        </p>
-        <ul>
-          <li>Precio (logaritmo)</li>
-          <li>Promoción</li>
-          <li>Sección</li>
-          <li>Temporada</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 5. AJUSTE DEL MODELO (CÓDIGO) -->
-    <div class="section-card">
-      <div class="section-header">
-        <div class="section-number">5</div>
-        <div>
-          <p class="section-title">Ajuste del modelo</p>
-          <p class="section-subtitle">Implementación en R</p>
-        </div>
-      </div>
-      <div class="section-body">
-
-<!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
-df_model <- df %>%
-  mutate(
-    log_sales = log(sales + 1),
-    log_price = log(price)
+df <- read_delim("Zara_sales.csv", delim = ";", show_col_types = FALSE) %>%
+  rename(
+    sales = `Sales Volume`,
+    promotion = Promotion
   )
-
-model <- lm(
-  log_sales ~ log_price + promotion + section + season,
-  data = df_model
-)
-
-summary(model)
 end.rcode-->
 
-        <p>
-          El modelo se ajusta utilizando una regresión lineal múltiple, incorporando tanto variables
-          numéricas como categóricas. Esto permite analizar el impacto individual de cada factor
-          sobre las ventas.
-        </p>
-      </div>
-    </div>
+<div class="section-card">
+  <h2>1. Preguntas que se pueden responder con un modelo de regresión</h2>
+  <p>A partir del dataset <i>Zara_sales.csv</i>, un modelo de regresión permite responder preguntas como:</p>
+  <ul>
+    <li>¿Cómo influyen el precio, la promoción, la sección y la temporada en las ventas?</li>
+    <li>¿Existe una relación negativa entre precio y volumen de ventas?</li>
+    <li>¿Qué factores explican mejor las diferencias de ventas entre productos?</li>
+    <li>¿Qué variables tienen mayor impacto comercial manteniendo constantes las demás?</li>
+  </ul>
+  <p>
+    Estas preguntas son adecuadas para regresión porque la variable objetivo es numérica continua.
+  </p>
+</div>
 
-    <!-- 6. INTERPRETACIÓN -->
-    <div class="section-card">
-      <div class="section-header">
-        <div class="section-number">6</div>
-        <div>
-          <p class="section-title">Interpretación de resultados</p>
-          <p class="section-subtitle">Lectura desde el punto de vista del negocio</p>
-        </div>
-      </div>
-      <div class="section-body">
-        <p>
-          Los resultados del modelo confirman varias intuiciones de negocio:
-        </p>
-        <ul>
-          <li>
-            El <b>precio</b> tiene un efecto negativo sobre las ventas: incrementos de precio reducen
-            el volumen vendido.
-          </li>
-          <li>
-            La <b>promoción</b> incrementa significativamente las ventas, incluso controlando por el
-            precio del producto.
-          </li>
-          <li>
-            Existen diferencias relevantes entre <b>secciones</b> y <b>temporadas</b>, lo que refleja
-            distintos patrones de demanda.
-          </li>
-        </ul>
-        <p>
-          En conjunto, el modelo explica una parte relevante del comportamiento de las ventas,
-          aunque quedan factores no observados que también influyen en el resultado final.
-        </p>
-      </div>
-    </div>
+<div class="section-card">
+  <h2>2. Definición del problema y relación conceptual entre variables</h2>
 
-    <!-- 7. CONCLUSIONES -->
-    <div class="section-card">
-      <div class="section-header">
-        <div class="section-number">7</div>
-        <div>
-          <p class="section-title">Conclusiones de negocio</p>
-          <p class="section-subtitle">Implicaciones prácticas</p>
-        </div>
-      </div>
-      <div class="section-body">
-        <p>
-          El análisis de regresión muestra que el rendimiento comercial de los productos depende de
-          una combinación de precio y contexto.
-        </p>
-        <p>
-          Desde una perspectiva estratégica:
-        </p>
-        <ul>
-          <li>
-            El <b>precio</b> debe gestionarse con cuidado, ya que tiene un impacto directo en el
-            volumen de ventas.
-          </li>
-          <li>
-            Las <b>promociones</b> son una herramienta eficaz para impulsar la demanda, especialmente
-            en productos con precios más elevados.
-          </li>
-          <li>
-            Ajustar el surtido y las campañas por <b>sección</b> y <b>temporada</b> puede mejorar
-            significativamente los resultados.
-          </li>
-        </ul>
-        <p>
-          En conjunto, el modelo proporciona una base cuantitativa sólida para optimizar decisiones
-          de pricing, promociones y planificación comercial.
-        </p>
-      </div>
+  <h3>Variable dependiente</h3>
+  <ul>
+    <li><b>Sales (ventas)</b>: unidades vendidas por producto.</li>
+  </ul>
+
+  <h3>Variables independientes</h3>
+  <ul>
+    <li><b>Price (precio)</b>: posicionamiento económico del producto.</li>
+    <li><b>Promotion (promoción)</b>: indicador de acción comercial.</li>
+    <li><b>Section (sección)</b>: tipo de público objetivo.</li>
+    <li><b>Season (temporada)</b>: contexto temporal de venta.</li>
+  </ul>
+
+  <h3>Relación conceptual esperada (negocio)</h3>
+  <ul>
+    <li><b>Precio → Ventas</b>: relación negativa (elasticidad precio).</li>
+    <li><b>Promoción → Ventas</b>: relación positiva (impulso de demanda).</li>
+    <li><b>Sección / Temporada → Ventas</b>: diferencias estructurales del catálogo.</li>
+  </ul>
+</div>
+
+<div class="section-card">
+  <h2>3. Análisis bivariado (ventas vs cada variable)</h2>
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-number">3.6.1</div>
+    <div>
+      <p class="section-title">Relación entre precio y ventas</p>
+      <p class="section-subtitle">Regresión lineal simple</p>
     </div>
+  </div>
+  <div class="section-body">
+
+<!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
+ggplot(df, aes(x = price, y = sales)) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(
+    title = "Relación entre precio y ventas",
+    x = "Precio",
+    y = "Ventas"
+  )
+end.rcode-->
+
+    <p>
+      El gráfico muestra la relación entre el precio del producto y el volumen de ventas,
+      junto con una línea de regresión que resume la tendencia general del comportamiento.
+      La pendiente negativa de la línea indica que, en promedio, a medida que aumenta el
+      precio, las ventas tienden a disminuir.
+    </p>
+
+    <p>
+      La dispersión de los puntos alrededor de la línea refleja que, aunque el precio es un
+      factor importante, no determina por sí solo el éxito comercial del producto. Existen
+      productos con precios elevados que logran buenas ventas, lo que apunta a la influencia
+      de otros factores como el diseño, la moda o la percepción de calidad.
+    </p>
+
+    <p>
+      <b>Interpretación de negocio:</b> el precio actúa como un freno natural a la demanda.
+      Subidas de precio deben estar respaldadas por un mayor valor percibido para no penalizar
+      el volumen de ventas.
+    </p>
 
   </div>
 </div>
 
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-number">3.6.2</div>
+    <div>
+      <p class="section-title">Impacto de la promoción en las ventas</p>
+      <p class="section-subtitle">Regresión lineal simple</p>
+    </div>
+  </div>
+  <div class="section-body">
+
+<!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
+df$promo_num <- ifelse(df$promotion == "Yes", 1, 0)
+
+ggplot(df, aes(x = promo_num, y = sales)) +
+  geom_jitter(width = 0.05, alpha = 0.4) +
+  geom_smooth(method = "lm", se = TRUE) +
+  scale_x_continuous(
+    breaks = c(0, 1),
+    labels = c("No promoción", "Promoción")
+  ) +
+  labs(
+    title = "Efecto de la promoción en las ventas",
+    x = "Promoción",
+    y = "Ventas"
+  )
+end.rcode-->
+
+    <p>
+      El gráfico compara el volumen de ventas de los productos promocionados frente a los no
+      promocionados, incorporando una línea de regresión que resume la diferencia media entre
+      ambos grupos.
+    </p>
+
+    <p>
+      La pendiente positiva de la línea indica que los productos en promoción, en promedio,
+      alcanzan mayores niveles de ventas. Sin embargo, la dispersión muestra que el efecto no
+      es uniforme: algunos productos reaccionan mejor que otros a las promociones.
+    </p>
+
+    <p>
+      <b>Interpretación de negocio:</b> las promociones incrementan la probabilidad de vender
+      más unidades, pero deben aplicarse de forma estratégica, priorizando productos con alto
+      potencial de respuesta.
+    </p>
+
+  </div>
+</div>
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-number">3.6.3</div>
+    <div>
+      <p class="section-title">Ventas por sección</p>
+      <p class="section-subtitle">Regresión lineal simple</p>
+    </div>
+  </div>
+  <div class="section-body">
+
+<!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
+ggplot(df, aes(x = section, y = sales)) +
+  geom_jitter(width = 0.2, alpha = 0.4) +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(
+    title = "Ventas por sección",
+    x = "Sección",
+    y = "Ventas"
+  )
+end.rcode-->
+
+    <p>
+      Este gráfico analiza el comportamiento de las ventas según la sección del catálogo.
+      La línea de regresión refleja diferencias estructurales en el volumen medio de ventas
+      entre secciones.
+    </p>
+
+    <p>
+      Algunas secciones muestran un mayor nivel de ventas esperado, lo que sugiere una mejor
+      alineación entre oferta y demanda para determinados públicos.
+    </p>
+
+    <p>
+      <b>Interpretación de negocio:</b> cada sección responde a dinámicas distintas, por lo
+      que aplicar una estrategia comercial homogénea puede generar ineficiencias.
+    </p>
+        <p>
+      <b style="color:red">Nota :</b> en los gráficos correspondientes a Sección y Temporada, la línea de regresión no se muestra inicialmente porque estas variables son categóricas y no numéricas. Al tratarse de factores, el modelo de regresión no puede ajustar una recta continua sobre el eje horizontal, ya que no existe una escala numérica natural entre las categorías
+    </p>
+
+  </div>
+</div>
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-number">3.6.4</div>
+    <div>
+      <p class="section-title">Ventas por temporada</p>
+      <p class="section-subtitle">Regresión lineal simple</p>
+    </div>
+  </div>
+  <div class="section-body">
+
+<!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
+ggplot(df, aes(x = season, y = sales)) +
+  geom_jitter(width = 0.2, alpha = 0.4) +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(
+    title = "Ventas por temporada",
+    x = "Temporada",
+    y = "Ventas"
+  )
+end.rcode-->
+
+    <p>
+      El gráfico muestra cómo varían las ventas a lo largo de las distintas temporadas,
+      destacando patrones estacionales en el comportamiento del cliente.
+    </p>
+
+    <p>
+      La línea de regresión permite identificar temporadas con un rendimiento medio superior,
+      lo que tiene implicaciones directas en la planificación comercial.
+    </p>
+
+    <p>
+      <b>Interpretación de negocio:</b> ajustar lanzamientos, stock y promociones según la
+      temporada puede mejorar significativamente los resultados de ventas.
+    </p>
+    <p>
+    <b style="color:red">Nota :</b> en los gráficos correspondientes a Sección y Temporada, la línea de regresión no se muestra inicialmente porque estas variables son categóricas y no numéricas. Al tratarse de factores, el modelo de regresión no puede ajustar una recta continua sobre el eje horizontal, ya que no existe una escala numérica natural entre las categorías
+    </p>
+  </div>
+</div>
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-number">3.6.5</div>
+    <div>
+      <p class="section-title">Conclusión del análisis de regresiones simples</p>
+      <p class="section-subtitle">Visión individual de cada factor</p>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>
+      Los gráficos de regresión lineal simple confirman visualmente que cada variable tiene
+      un impacto individual sobre las ventas.
+    </p>
+    <p>
+      No obstante, la dispersión observada en todos los casos indica que las decisiones de
+      compra dependen de múltiples factores que actúan simultáneamente.
+    </p>
+    <p>
+      <b>Conclusión de negocio:</b> estos análisis justifican la necesidad de un modelo
+      multivariable que permita evaluar el impacto conjunto de todos los factores.
+    </p>
+  </div>
+</div>
+
+<div class="section-card">
+  <h2>4. Formulación del modelo y transformaciones</h2>
+
+  <h3>Problemas detectados</h3>
+  <ul>
+    <li>Distribución de ventas muy sesgada.</li>
+    <li>Presencia de outliers.</li>
+  </ul>
+
+  <h3>Transformaciones sugeridas</h3>
+  <ul>
+    <li>Logaritmo de ventas: estabiliza la varianza.</li>
+    <li>Logaritmo de precio: permite interpretar elasticidades.</li>
+  </ul>
+
+</div>
+
+
+<div class="section-card">
+  <h2>5. Conclusiones del análisis</h2>
+  <ul>
+    <li>El precio es un factor clave, pero no actúa de forma aislada.</li>
+    <li>Las promociones son efectivas para aumentar el volumen vendido.</li>
+    <li>La sección y la temporada influyen en el rendimiento comercial.</li>
+    <li>El modelo permite simular escenarios de pricing y promoción.</li>
+  </ul>
+
+  <p>
+    Este análisis proporciona una base cuantitativa para optimizar precios,
+    diseñar campañas y priorizar productos.
+  </p>
+</div>
+
+</div>
 </body>
 </html>

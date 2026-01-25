@@ -58,22 +58,23 @@
 
 </div>
 <!-- ========== FIN HERO ========== -->
-<!--begin.rcode setup, include=FALSE
+
+<!--begin.rcode setup_fase6, include=FALSE, local=TRUE
 library(dplyr)
 library(readr)
+library(ggplot2)
 
-df <- read_delim(
+df_fase6 <- read_delim(
   "Zara_sales.csv",
   delim = ";",
   show_col_types = FALSE
-)
-
-df <- df %>%
+) %>%
   rename(
     sales = `Sales Volume`,
     promotion = Promotion
   )
 end.rcode-->
+
 <!-- ========== FASE 6: ANÁLISIS DE CONGLOMERADOS ========== -->
 
 <div class="phase-header">
@@ -161,8 +162,8 @@ end.rcode-->
       </div>
       <div class="section-body">
 
-<!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
-df_cluster <- df %>%
+<!--begin.rcode fase62, echo=FALSE, message=FALSE, warning=FALSE
+df_cluster <- df_fase6 %>%
   mutate(
     log_price = log(price),
     log_sales = log(sales + 1),
@@ -198,13 +199,48 @@ end.rcode-->
           lo que permite una lectura clara desde el punto de vista del negocio.
         </p>
 
-<!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
+<!--begin.rcode ayuda, echo=FALSE, message=FALSE, warning=FALSE
 set.seed(123)
 kmeans_model <- kmeans(df_cluster, centers = 3, nstart = 25)
 
 df$cluster <- as.factor(kmeans_model$cluster)
 end.rcode-->
+<!--begin.rcode me, echo=FALSE, message=FALSE, warning=FALSE
+set.seed(123)
 
+kmeans_model <- kmeans(
+  df_cluster,
+  centers = 3,
+  nstart = 25
+)
+
+df_clustered <- df_fase6 %>%
+  mutate(cluster = as.factor(kmeans_model$cluster))
+end.rcode-->
+<!--begin.rcode no, echo=FALSE, message=FALSE, warning=FALSE
+df_plot <- df_clustered %>%
+  mutate(
+    log_price = log(price),
+    log_sales = log(sales + 1)
+  )
+
+hola <- ggplot(df_plot, aes(x = log_price, y = log_sales, color = cluster)) +
+  geom_point(alpha = 0.6, size = 2) +
+  labs(
+    title = "Segmentación de productos mediante k-means",
+    subtitle = "Clusters basados en precio y volumen de ventas",
+    x = "Log(Precio)",
+    y = "Log(Ventas)",
+    color = "Cluster"
+  ) +
+  theme_minimal()
+
+print(hola)
+end.rcode-->
+
+        <p>
+El gráfico muestra una clara diferenciación entre los tres clusters identificados.
+Se observa cómo los productos se agrupan según su nivel de precio y volumen de ventas, lo que refuerza la validez de la segmentación obtenida mediante el algoritmo k-means.        </p>
       </div>
     </div>
 
