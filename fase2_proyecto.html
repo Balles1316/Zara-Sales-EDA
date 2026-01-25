@@ -117,6 +117,9 @@
     <a href="index.html" class="phase-link">Definición del Proyecto</a>
     <a href="fase2_proyecto.html" class="phase-link active">Comprensión de los Datos</a>
     <a href="fase3_proyecto.html" class="phase-link">Análisis Exploratorio de Datos</a>
+    <a href="fase4_proyecto.html" class="phase-link">Análisis de Regresión</a>
+    <a href="fase5_proyecto.html" class="phase-link">Análisis de Regresión Logistica</a>
+    <a href="fase6_proyecto.html" class="phase-link">Análisis de Conglomerados</a>
   </div>
 
   <!-- ========== HERO FASE 2 ========== -->
@@ -156,7 +159,12 @@
   <!-- ========== FIN HERO ========== -->
 
   <!-- ========= CHUNK DE SETUP (R OCULTO) ========= -->
-
+<div class="chunk" id="setup"><div class="rcode"><div class="error"><pre class="knitr r">## Error: connection to server at "192.168.1.194", port 5432 failed: Connection timed out (0x0000274C/10060)
+## 	Is the server running on that host and accepting TCP/IP connections?
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbWriteTable': object 'con' not found
+</pre></div>
+</div></div>
 
   <!-- ========== CONTENIDO PRINCIPAL ========== -->
   <div class="layout">
@@ -218,24 +226,13 @@ GROUP BY section;
             </code>
           </div>
 
-<div class="result-card"><table class="table">
- <thead>
-  <tr>
-   <th style="text-align:left;"> section </th>
-   <th style="text-align:right;"> num_productos </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> MAN </td>
-   <td style="text-align:right;"> 6998 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> WOMAN </td>
-   <td style="text-align:right;"> 13254 </td>
-  </tr>
-</tbody>
-</table></div>
+<div class="error"><pre class="knitr r">## Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbGetQuery': object 'con' not found
+</pre></div>
+<div class="error"><pre class="knitr r">## Error: object 'res1' not found
+</pre></div>
+<div class="error"><pre class="knitr r">## Error: object 'html' not found
+</pre></div>
+
 
           <!-- 2) Ventas por temporada -->
           <div class="sql-card">
@@ -249,37 +246,13 @@ GROUP BY season;
             </code>
           </div>
 
-<div class="result-card"><table class="table">
- <thead>
-  <tr>
-   <th style="text-align:left;"> season </th>
-   <th style="text-align:right;"> avg_sales </th>
-   <th style="text-align:right;"> total_sales </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Winter </td>
-   <td style="text-align:right;"> 1174.613 </td>
-   <td style="text-align:right;"> 6042207 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Summer </td>
-   <td style="text-align:right;"> 1184.589 </td>
-   <td style="text-align:right;"> 3442417 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Autumn </td>
-   <td style="text-align:right;"> 1042.820 </td>
-   <td style="text-align:right;"> 7993214 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Spring </td>
-   <td style="text-align:right;"> 1046.223 </td>
-   <td style="text-align:right;"> 4746716 </td>
-  </tr>
-</tbody>
-</table></div>
+<div class="error"><pre class="knitr r">## Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbGetQuery': object 'con' not found
+</pre></div>
+<div class="error"><pre class="knitr r">## Error: object 'res2' not found
+</pre></div>
+<div class="error"><pre class="knitr r">## Error: object 'html' not found
+</pre></div>
+
 
           <!-- 3) Ventas por rangos de precio -->
           <div class="sql-card">
@@ -296,22 +269,13 @@ GROUP BY rango_precio;
             </code>
           </div>
 
-<div class="result-card"><table class="table">
- <thead>
-  <tr>
-   <th style="text-align:left;"> rango_precio </th>
-   <th style="text-align:right;"> avg_sales </th>
-   <th style="text-align:right;"> num_productos </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Alto </td>
-   <td style="text-align:right;"> 1097.4 </td>
-   <td style="text-align:right;"> 20252 </td>
-  </tr>
-</tbody>
-</table></div>
+<div class="error"><pre class="knitr r">## Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbGetQuery': object 'con' not found
+</pre></div>
+<div class="error"><pre class="knitr r">## Error: object 'res3' not found
+</pre></div>
+<div class="error"><pre class="knitr r">## Error: object 'html' not found
+</pre></div>
+
 
           <!-- 4) Promoción vs ventas -->
           <div class="sql-card">
@@ -325,27 +289,13 @@ GROUP BY promotion;
             </code>
           </div>
 
-<div class="result-card"><table class="table">
- <thead>
-  <tr>
-   <th style="text-align:left;"> promotion </th>
-   <th style="text-align:right;"> avg_sales </th>
-   <th style="text-align:right;"> total_sales </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> No </td>
-   <td style="text-align:right;"> 872.3771 </td>
-   <td style="text-align:right;"> 10304518 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Yes </td>
-   <td style="text-align:right;"> 1412.3265 </td>
-   <td style="text-align:right;"> 11920036 </td>
-  </tr>
-</tbody>
-</table></div>
+<div class="error"><pre class="knitr r">## Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbGetQuery': object 'con' not found
+</pre></div>
+<div class="error"><pre class="knitr r">## Error: object 'res4' not found
+</pre></div>
+<div class="error"><pre class="knitr r">## Error: object 'html' not found
+</pre></div>
+
 
           <!-- 5) Ventas por origen -->
           <div class="sql-card">
@@ -359,77 +309,13 @@ GROUP BY origin;
             </code>
           </div>
 
-<div class="result-card"><table class="table">
- <thead>
-  <tr>
-   <th style="text-align:left;"> origin </th>
-   <th style="text-align:right;"> avg_sales </th>
-   <th style="text-align:right;"> total_sales </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Bangladesh </td>
-   <td style="text-align:right;"> 1087.658 </td>
-   <td style="text-align:right;"> 3934058 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Cambodia </td>
-   <td style="text-align:right;"> 1091.422 </td>
-   <td style="text-align:right;"> 1070685 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Portugal </td>
-   <td style="text-align:right;"> 1094.743 </td>
-   <td style="text-align:right;"> 1554535 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Turkey </td>
-   <td style="text-align:right;"> 1091.313 </td>
-   <td style="text-align:right;"> 2700999 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> China </td>
-   <td style="text-align:right;"> 1106.441 </td>
-   <td style="text-align:right;"> 4454532 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Spain </td>
-   <td style="text-align:right;"> 1102.844 </td>
-   <td style="text-align:right;"> 1376349 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Argentina </td>
-   <td style="text-align:right;"> 1096.514 </td>
-   <td style="text-align:right;"> 196276 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> India </td>
-   <td style="text-align:right;"> 1096.032 </td>
-   <td style="text-align:right;"> 2228233 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Vietnam </td>
-   <td style="text-align:right;"> 1094.718 </td>
-   <td style="text-align:right;"> 1335556 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Pakistan </td>
-   <td style="text-align:right;"> 1095.286 </td>
-   <td style="text-align:right;"> 662648 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Brazil </td>
-   <td style="text-align:right;"> 1127.155 </td>
-   <td style="text-align:right;"> 896088 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Morocco </td>
-   <td style="text-align:right;"> 1097.759 </td>
-   <td style="text-align:right;"> 1814595 </td>
-  </tr>
-</tbody>
-</table></div>
+<div class="error"><pre class="knitr r">## Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbGetQuery': object 'con' not found
+</pre></div>
+<div class="error"><pre class="knitr r">## Error: object 'res5' not found
+</pre></div>
+<div class="error"><pre class="knitr r">## Error: object 'html' not found
+</pre></div>
+
 
           <!-- 6) Ventas por posición en tienda -->
           <div class="sql-card">
@@ -443,32 +329,13 @@ GROUP BY product_position;
             </code>
           </div>
 
-<div class="result-card"><table class="table">
- <thead>
-  <tr>
-   <th style="text-align:left;"> product_position </th>
-   <th style="text-align:right;"> avg_sales </th>
-   <th style="text-align:right;"> num_productos </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Front of Store </td>
-   <td style="text-align:right;"> 1103.361 </td>
-   <td style="text-align:right;"> 5651 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Aisle </td>
-   <td style="text-align:right;"> 1090.427 </td>
-   <td style="text-align:right;"> 7810 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> End-cap </td>
-   <td style="text-align:right;"> 1100.460 </td>
-   <td style="text-align:right;"> 6791 </td>
-  </tr>
-</tbody>
-</table></div>
+<div class="error"><pre class="knitr r">## Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbGetQuery': object 'con' not found
+</pre></div>
+<div class="error"><pre class="knitr r">## Error: object 'res6' not found
+</pre></div>
+<div class="error"><pre class="knitr r">## Error: object 'html' not found
+</pre></div>
+
 
           <!-- 7) Ventas por colección (terms) -->
           <div class="sql-card">
@@ -482,42 +349,13 @@ GROUP BY terms;
             </code>
           </div>
 
-<div class="result-card"><table class="table">
- <thead>
-  <tr>
-   <th style="text-align:left;"> terms </th>
-   <th style="text-align:right;"> avg_sales </th>
-   <th style="text-align:right;"> total_sales </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> shoes </td>
-   <td style="text-align:right;"> 1089.090 </td>
-   <td style="text-align:right;"> 2676982 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> t-shirts </td>
-   <td style="text-align:right;"> 1088.200 </td>
-   <td style="text-align:right;"> 2879378 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> sweaters </td>
-   <td style="text-align:right;"> 1104.926 </td>
-   <td style="text-align:right;"> 3598743 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> jeans </td>
-   <td style="text-align:right;"> 1094.549 </td>
-   <td style="text-align:right;"> 721308 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> jackets </td>
-   <td style="text-align:right;"> 1099.372 </td>
-   <td style="text-align:right;"> 12348143 </td>
-  </tr>
-</tbody>
-</table></div>
+<div class="error"><pre class="knitr r">## Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbGetQuery': object 'con' not found
+</pre></div>
+<div class="error"><pre class="knitr r">## Error: object 'res7' not found
+</pre></div>
+<div class="error"><pre class="knitr r">## Error: object 'html' not found
+</pre></div>
+
 
         </div>
       </div>
@@ -608,7 +446,9 @@ GROUP BY terms;
   </div>
 
   <!-- Cerrar conexión al final del documento -->
-
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="error"><pre class="knitr r">## Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbDisconnect': object 'con' not found
+</pre></div>
+</div></div>
 
 </div>
 

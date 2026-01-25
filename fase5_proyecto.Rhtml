@@ -1,0 +1,293 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Fase 5 – Análisis de Regresión</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="page">
+
+  <!-- NAV FASES -->
+  <div class="phases-nav">
+    <a href="index.html" class="phase-link">Definición del Proyecto</a>
+    <a href="fase2_proyecto.html" class="phase-link">Comprensión de los Datos</a>
+    <a href="fase3_proyecto.html" class="phase-link">Análisis Exploratorio de Datos</a>
+    <a href="fase4_proyecto.html" class="phase-link">Análisis de Regresión</a>
+    <a href="fase5_proyecto.html" class="phase-link active">Análisis de Regresión Logistica</a>
+    <a href="fase6_proyecto.html" class="phase-link">Análisis de Conglomerados</a>
+
+  </div>
+
+<!-- ========== HERO FASE 5 ========== -->
+<div class="hero-container">
+
+  <div class="hero-left">
+    <h1 class="hero-title">Análisis de Regresión Logística</h1>
+    <p class="hero-subtitle">
+      Identificación de factores que influyen en la probabilidad de éxito comercial
+    </p>
+
+    <div class="hero-badges">
+      <span class="hero-badge">Román Ballesteros Martínez</span>
+      <span class="hero-badge">Regresión Logística</span>
+      <span class="hero-badge">Clasificación</span>
+    </div>
+
+    <p class="hero-description">
+      En esta fase se emplea un modelo de <b>regresión logística</b> para estimar la
+      <b>probabilidad de que un producto sea comercialmente exitoso</b>, a partir de
+      variables como el precio, la promoción, la sección y la temporada.
+      El análisis permite clasificar los productos en función de su potencial de ventas
+      y apoyar decisiones estratégicas antes del lanzamiento o la promoción.
+    </p>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-box">
+      <p class="hero-box-title">Resumen de la fase</p>
+      <ul class="hero-info-list">
+        <li><span>👤</span> Autor: <b>Román Ballesteros Martínez</b></li>
+        <li><span>🎯</span> Objetivo: <b>probabilidad de éxito comercial</b></li>
+        <li><span>📊</span> Variables: <b>precio, promoción, sección, temporada</b></li>
+        <li><span>🧮</span> Técnica: <b>regresión logística</b></li>
+        <li><span>🧠</span> Enfoque: <b>clasificación orientada al negocio</b></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+<!-- ========== FIN HERO ========== -->
+<!--begin.rcode setup, include=FALSE
+library(dplyr)
+library(readr)
+
+df <- read_delim(
+  "Zara_sales.csv",
+  delim = ";",
+  show_col_types = FALSE
+)
+
+df <- df %>%
+  rename(
+    sales = `Sales Volume`,
+    promotion = Promotion
+  )
+end.rcode-->
+<!-- ========== FASE 5: ANÁLISIS DE REGRESIÓN LOGÍSTICA ========== -->
+
+<div class="phase-header">
+  <p class="phase-title">Análisis de Regresión Logística</p>
+  <p class="phase-subtitle">
+    Identificación de los factores que influyen en la probabilidad de éxito comercial de un producto.
+  </p>
+  <div class="phase-badges">
+    <span class="phase-badge">Regresión logística</span>
+    <span class="phase-badge">Clasificación</span>
+    <span class="phase-badge">Negocio</span>
+  </div>
+</div>
+
+<div class="layout">
+  <div>
+
+    <!-- 1. DEFINICIÓN DE LA VARIABLE OBJETIVO -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-number">1</div>
+        <div>
+          <p class="section-title">Definición de la variable objetivo</p>
+          <p class="section-subtitle">Conversión a una variable dicotómica</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <p>
+          Para aplicar un modelo de regresión logística es necesario definir una variable dependiente
+          dicotómica. En este caso, se recodifica la variable de ventas para identificar si un producto
+          puede considerarse o no un <b>producto de éxito comercial</b>.
+        </p>
+        <p>
+          Se define un producto como <b>“éxitos de ventas”</b> cuando su volumen de ventas se sitúa
+          por encima de la mediana del dataset. Esta definición permite:
+        </p>
+        <ul>
+          <li>Separar productos con buen desempeño comercial del resto del catálogo.</li>
+          <li>Evitar que valores extremos distorsionen la clasificación.</li>
+          <li>Plantear un problema alineado con decisiones reales de negocio.</li>
+        </ul>
+        <p>
+          La nueva variable objetivo toma los valores:
+        </p>
+        <ul>
+          <li><b>1</b>: producto con ventas altas</li>
+          <li><b>0</b>: producto con ventas bajas</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 2. VARIABLES EXPLICATIVAS -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-number">2</div>
+        <div>
+          <p class="section-title">Variables explicativas</p>
+          <p class="section-subtitle">Consistencia con la regresión lineal</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <p>
+          Siguiendo la recomendación del enunciado, se utilizan las <b>mismas variables explicativas</b>
+          empleadas en la regresión lineal múltiple:
+        </p>
+        <ul>
+          <li><b>Precio</b> (transformado en logaritmo)</li>
+          <li><b>Promoción</b></li>
+          <li><b>Sección</b></li>
+          <li><b>Temporada</b></li>
+        </ul>
+        <p>
+          De este modo, el modelo permite analizar si los factores que influyen en el volumen de ventas
+          también afectan a la <b>probabilidad de que un producto sea comercialmente exitoso</b>.
+        </p>
+      </div>
+    </div>
+
+    <!-- 3. PREPARACIÓN DE LOS DATOS -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-number">3</div>
+        <div>
+          <p class="section-title">Preparación de los datos</p>
+          <p class="section-subtitle">Tratamiento de variables</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <p>
+          Antes de ajustar el modelo, se realizan las siguientes transformaciones:
+        </p>
+        <ul>
+          <li>Creación de la variable dicotómica de éxito comercial.</li>
+          <li>Transformación logarítmica del precio.</li>
+          <li>Conversión de variables categóricas a factores.</li>
+        </ul>
+
+<!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
+df_logit <- df %>%
+  mutate(
+    success = ifelse(sales > median(sales), 1, 0),
+    log_price = log(price),
+    promotion = as.factor(promotion),
+    section = as.factor(section),
+    season = as.factor(season)
+  )
+end.rcode-->
+
+        <p>
+          Este tratamiento garantiza que el modelo logístico sea coherente y que los resultados
+          puedan interpretarse correctamente.
+        </p>
+      </div>
+    </div>
+
+    <!-- 4. AJUSTE DEL MODELO -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-number">4</div>
+        <div>
+          <p class="section-title">Ajuste del modelo logístico</p>
+          <p class="section-subtitle">Probabilidad de éxito comercial</p>
+        </div>
+      </div>
+      <div class="section-body">
+
+<!--begin.rcode echo=FALSE, message=FALSE, warning=FALSE
+logit_model <- glm(
+  success ~ log_price + promotion + section + season,
+  data = df_logit,
+  family = binomial(link = "logit")
+)
+
+summary(logit_model)
+end.rcode-->
+
+        <p>
+          El modelo estima la probabilidad de que un producto pertenezca al grupo de altas ventas
+          en función de sus características de precio y contexto comercial.
+        </p>
+      </div>
+    </div>
+
+    <!-- 5. INTERPRETACIÓN DE RESULTADOS -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-number">5</div>
+        <div>
+          <p class="section-title">Interpretación de resultados</p>
+          <p class="section-subtitle">Lectura orientada al negocio</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <p>
+          La regresión logística permite interpretar los resultados en términos de
+          <b>probabilidad de éxito comercial</b>.
+        </p>
+        <ul>
+          <li>
+            <b>Precio</b>: un aumento del precio reduce la probabilidad de que un producto sea un
+            éxito de ventas.
+          </li>
+          <li>
+            <b>Promoción</b>: los productos en promoción presentan una mayor probabilidad de situarse
+            entre los más vendidos.
+          </li>
+          <li>
+            <b>Sección</b>: existen secciones con mayor probabilidad de generar productos exitosos.
+          </li>
+          <li>
+            <b>Temporada</b>: algunas temporadas aumentan la probabilidad de éxito frente a otras.
+          </li>
+        </ul>
+        <p>
+          Estos resultados son especialmente útiles para anticipar el desempeño de nuevos productos
+          antes de su lanzamiento.
+        </p>
+      </div>
+    </div>
+
+    <!-- 6. CONCLUSIONES -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-number">6</div>
+        <div>
+          <p class="section-title">Conclusiones de negocio</p>
+          <p class="section-subtitle">Uso práctico del modelo</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <p>
+          El modelo de regresión logística permite clasificar los productos según su probabilidad
+          de éxito comercial, aportando una visión complementaria a la regresión lineal.
+        </p>
+        <p>
+          Desde el punto de vista del negocio, este análisis permite:
+        </p>
+        <ul>
+          <li>Identificar productos con alto potencial de ventas.</li>
+          <li>Ajustar precios para maximizar la probabilidad de éxito.</li>
+          <li>Decidir qué productos priorizar en campañas promocionales.</li>
+          <li>Optimizar la planificación del surtido por sección y temporada.</li>
+        </ul>
+        <p>
+          En conjunto, la regresión logística proporciona una herramienta clara y accionable para
+          apoyar decisiones estratégicas basadas en datos.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
