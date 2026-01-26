@@ -203,7 +203,8 @@ end.rcode-->
 set.seed(123)
 kmeans_model <- kmeans(df_cluster, centers = 3, nstart = 25)
 
-df$cluster <- as.factor(kmeans_model$cluster)
+df_clustered <- df_fase6 %>%
+  mutate(cluster = as.factor(kmeans_model$cluster))
 end.rcode-->
 <!--begin.rcode me, echo=FALSE, message=FALSE, warning=FALSE
 set.seed(123)

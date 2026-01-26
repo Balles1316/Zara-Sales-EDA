@@ -159,10 +159,21 @@
   <!-- ========== FIN HERO ========== -->
 
   <!-- ========= CHUNK DE SETUP (R OCULTO) ========= -->
-<div class="chunk" id="setup"><div class="rcode"><div class="error"><pre class="knitr r">## Error: connection to server at "192.168.1.194", port 5432 failed: Connection timed out (0x0000274C/10060)
-## 	Is the server running on that host and accepting TCP/IP connections?
+<div class="chunk" id="setup"><div class="rcode"><div class="error"><pre class="knitr r">## Error in library(DBI): no hay paquete llamado 'DBI'
 </pre></div>
-<div class="error"><pre class="knitr r">## Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbWriteTable': object 'con' not found
+<div class="error"><pre class="knitr r">## Error in library(RPostgres): no hay paquete llamado 'RPostgres'
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in library(readr): no hay paquete llamado 'readr'
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in library(dplyr): no hay paquete llamado 'dplyr'
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in dbConnect(RPostgres::Postgres(), host = "192.168.1.194", port = 5432, : no se pudo encontrar la función "dbConnect"
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in read_csv2("Zara_sales.csv", show_col_types = FALSE): no se pudo encontrar la función "read_csv2"
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in rename(ventas, product_id = `Product ID`, product_position = `Product Position`, : no se pudo encontrar la función "rename"
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in dbWriteTable(con, "zara_sales", ventas, overwrite = TRUE): no se pudo encontrar la función "dbWriteTable"
 </pre></div>
 </div></div>
 
@@ -226,11 +237,11 @@ GROUP BY section;
             </code>
           </div>
 
-<div class="error"><pre class="knitr r">## Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbGetQuery': object 'con' not found
+<div class="error"><pre class="knitr r">## Error in dbGetQuery(con, "\n  SELECT section, COUNT(*) AS num_productos\n  FROM zara_sales\n  GROUP BY section;\n"): no se pudo encontrar la función "dbGetQuery"
 </pre></div>
-<div class="error"><pre class="knitr r">## Error: object 'res1' not found
+<div class="error"><pre class="knitr r">## Error: objeto 'res1' no encontrado
 </pre></div>
-<div class="error"><pre class="knitr r">## Error: object 'html' not found
+<div class="error"><pre class="knitr r">## Error: objeto 'html' no encontrado
 </pre></div>
 
 
@@ -246,11 +257,11 @@ GROUP BY season;
             </code>
           </div>
 
-<div class="error"><pre class="knitr r">## Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbGetQuery': object 'con' not found
+<div class="error"><pre class="knitr r">## Error in dbGetQuery(con, "\n  SELECT season,\n         AVG(sales) AS avg_sales,\n         SUM(sales) AS total_sales\n  FROM zara_sales\n  GROUP BY season;\n"): no se pudo encontrar la función "dbGetQuery"
 </pre></div>
-<div class="error"><pre class="knitr r">## Error: object 'res2' not found
+<div class="error"><pre class="knitr r">## Error: objeto 'res2' no encontrado
 </pre></div>
-<div class="error"><pre class="knitr r">## Error: object 'html' not found
+<div class="error"><pre class="knitr r">## Error: objeto 'html' no encontrado
 </pre></div>
 
 
@@ -269,11 +280,11 @@ GROUP BY rango_precio;
             </code>
           </div>
 
-<div class="error"><pre class="knitr r">## Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbGetQuery': object 'con' not found
+<div class="error"><pre class="knitr r">## Error in dbGetQuery(con, "\n  SELECT CASE\n    WHEN price &lt; 20 THEN 'Bajo'\n    WHEN price BETWEEN 20 AND 39.99 THEN 'Medio'\n    ELSE 'Alto'\n  END AS rango_precio,\n  AVG(sales) AS avg_sales,\n  COUNT(*) AS num_productos\n  FROM zara_sales\n  GROUP BY rango_precio;\n"): no se pudo encontrar la función "dbGetQuery"
 </pre></div>
-<div class="error"><pre class="knitr r">## Error: object 'res3' not found
+<div class="error"><pre class="knitr r">## Error: objeto 'res3' no encontrado
 </pre></div>
-<div class="error"><pre class="knitr r">## Error: object 'html' not found
+<div class="error"><pre class="knitr r">## Error: objeto 'html' no encontrado
 </pre></div>
 
 
@@ -289,11 +300,11 @@ GROUP BY promotion;
             </code>
           </div>
 
-<div class="error"><pre class="knitr r">## Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbGetQuery': object 'con' not found
+<div class="error"><pre class="knitr r">## Error in dbGetQuery(con, "\n  SELECT promotion,\n         AVG(sales) AS avg_sales,\n         SUM(sales) AS total_sales\n  FROM zara_sales\n  GROUP BY promotion;\n"): no se pudo encontrar la función "dbGetQuery"
 </pre></div>
-<div class="error"><pre class="knitr r">## Error: object 'res4' not found
+<div class="error"><pre class="knitr r">## Error: objeto 'res4' no encontrado
 </pre></div>
-<div class="error"><pre class="knitr r">## Error: object 'html' not found
+<div class="error"><pre class="knitr r">## Error: objeto 'html' no encontrado
 </pre></div>
 
 
@@ -309,11 +320,11 @@ GROUP BY origin;
             </code>
           </div>
 
-<div class="error"><pre class="knitr r">## Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbGetQuery': object 'con' not found
+<div class="error"><pre class="knitr r">## Error in dbGetQuery(con, "\n  SELECT origin,\n         AVG(sales) AS avg_sales,\n         SUM(sales) AS total_sales\n  FROM zara_sales\n  GROUP BY origin;\n"): no se pudo encontrar la función "dbGetQuery"
 </pre></div>
-<div class="error"><pre class="knitr r">## Error: object 'res5' not found
+<div class="error"><pre class="knitr r">## Error: objeto 'res5' no encontrado
 </pre></div>
-<div class="error"><pre class="knitr r">## Error: object 'html' not found
+<div class="error"><pre class="knitr r">## Error: objeto 'html' no encontrado
 </pre></div>
 
 
@@ -329,11 +340,11 @@ GROUP BY product_position;
             </code>
           </div>
 
-<div class="error"><pre class="knitr r">## Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbGetQuery': object 'con' not found
+<div class="error"><pre class="knitr r">## Error in dbGetQuery(con, "\n  SELECT product_position,\n         AVG(sales) AS avg_sales,\n         COUNT(*) AS num_productos\n  FROM zara_sales\n  GROUP BY product_position;\n"): no se pudo encontrar la función "dbGetQuery"
 </pre></div>
-<div class="error"><pre class="knitr r">## Error: object 'res6' not found
+<div class="error"><pre class="knitr r">## Error: objeto 'res6' no encontrado
 </pre></div>
-<div class="error"><pre class="knitr r">## Error: object 'html' not found
+<div class="error"><pre class="knitr r">## Error: objeto 'html' no encontrado
 </pre></div>
 
 
@@ -349,11 +360,11 @@ GROUP BY terms;
             </code>
           </div>
 
-<div class="error"><pre class="knitr r">## Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbGetQuery': object 'con' not found
+<div class="error"><pre class="knitr r">## Error in dbGetQuery(con, "\n  SELECT terms,\n         AVG(sales) AS avg_sales,\n         SUM(sales) AS total_sales\n  FROM zara_sales\n  GROUP BY terms;\n"): no se pudo encontrar la función "dbGetQuery"
 </pre></div>
-<div class="error"><pre class="knitr r">## Error: object 'res7' not found
+<div class="error"><pre class="knitr r">## Error: objeto 'res7' no encontrado
 </pre></div>
-<div class="error"><pre class="knitr r">## Error: object 'html' not found
+<div class="error"><pre class="knitr r">## Error: objeto 'html' no encontrado
 </pre></div>
 
 
@@ -446,7 +457,7 @@ GROUP BY terms;
   </div>
 
   <!-- Cerrar conexión al final del documento -->
-<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="error"><pre class="knitr r">## Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbDisconnect': object 'con' not found
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="error"><pre class="knitr r">## Error in loadNamespace(x): no hay paquete llamado 'DBI'
 </pre></div>
 </div></div>
 
