@@ -279,30 +279,117 @@ Se observa cómo los productos se agrupan según su nivel de precio y volumen de
       </div>
     </div>
 
-    <!-- 6. CONCLUSIONES -->
-    <div class="section-card">
-      <div class="section-header">
-        <div class="section-number">6</div>
-        <div>
-          <p class="section-title">Conclusiones de negocio</p>
-          <p class="section-subtitle">Uso estratégico de la segmentación</p>
-        </div>
-      </div>
-      <div class="section-body">
-        <p>
-          El análisis de conglomerados proporciona una visión clara y accionable del catálogo:
-        </p>
-        <ul>
-          <li>Los productos de alto volumen deben priorizarse en campañas y disponibilidad.</li>
-          <li>Los productos premium requieren una estrategia de valor más que de descuento.</li>
-          <li>Los productos de baja rotación son candidatos a replantear precio, promoción o retirada.</li>
-        </ul>
-        <p>
-          En conjunto, la segmentación permite diseñar estrategias comerciales diferenciadas,
-          alineadas con el comportamiento real de los productos.
-        </p>
-      </div>
+<!-- 6. CONCLUSIONES -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-number">6</div>
+    <div>
+      <p class="section-title">Conclusiones finales del proyecto</p>
+      <p class="section-subtitle">Síntesis global y aprendizajes de negocio</p>
     </div>
+  </div>
+
+  <div class="section-body">
+
+    <p>
+      Este proyecto ha abordado el análisis del dataset <i>Zara_sales.csv</i> siguiendo un
+      enfoque estructurado y progresivo, integrando todas las fases fundamentales de un
+      proyecto de ciencia de datos orientado al negocio. A lo largo del trabajo se ha pasado
+      desde la definición del problema hasta la obtención de conclusiones accionables,
+      combinando análisis descriptivo, modelado estadístico y segmentación.
+    </p>
+
+    <h4>Integración de resultados por fases</h4>
+
+    <p>
+      En la <b>Fase 1 (Definición del proyecto)</b> se estableció el contexto de negocio y los
+      objetivos principales: entender el comportamiento de las ventas, identificar patrones
+      comerciales relevantes y apoyar decisiones relacionadas con precio, promoción y
+      gestión del catálogo. Esta fase permitió alinear el análisis de datos con preguntas
+      reales del negocio.
+    </p>
+
+    <p>
+      En la <b>Fase 2 (Comprensión de los datos)</b> se realizó un trabajo exhaustivo de
+      exploración estructural y calidad del dataset, apoyado en una base de datos PostgreSQL.
+      Se validó que los datos eran consistentes y suficientemente ricos para el análisis,
+      permitiendo una primera lectura del comportamiento de las ventas según sección,
+      temporada, precio y promoción.
+    </p>
+
+    <p>
+      La <b>Fase 3 (Análisis Exploratorio de Datos)</b> aportó una visión clara del
+      comportamiento del catálogo. Se identificó una distribución de ventas muy asimétrica,
+      con una lógica de “larga cola”, donde pocos productos concentran gran parte del volumen
+      vendido. También se confirmó una relación negativa entre precio y ventas, así como
+      diferencias estructurales entre secciones y temporadas.
+    </p>
+
+    <p>
+      En la <b>Fase 4 (Regresión lineal)</b> se cuantificó el impacto de distintas variables
+      sobre el volumen de ventas. Los resultados mostraron que el precio actúa como un freno
+      a la demanda, mientras que la promoción tiene un efecto claramente positivo. Además,
+      sección y temporada introducen diferencias significativas en el desempeño comercial,
+      confirmando que el contexto es clave para interpretar las ventas.
+    </p>
+
+    <p>
+      La <b>Fase 5 (Regresión logística)</b> permitió cambiar el foco desde el volumen de
+      ventas a la <b>probabilidad de éxito comercial</b>. El modelo mostró que la promoción,
+      el precio y la sección influyen de forma decisiva en la probabilidad de que un producto
+      se sitúe entre los más vendidos, lo que resulta especialmente útil para la toma de
+      decisiones previas al lanzamiento o a la activación comercial.
+    </p>
+
+    <p>
+      Finalmente, en la <b>Fase 6 (Análisis de conglomerados)</b> se segmentó el catálogo en
+      grupos homogéneos de productos según su comportamiento comercial. Esta segmentación
+      permitió identificar perfiles claros, como productos de alto volumen, productos
+      premium de menor rotación y productos con bajo desempeño, facilitando una lectura
+      estratégica del surtido.
+    </p>
+
+    <h4>Conclusiones de negocio</h4>
+
+    <ul>
+      <li>
+        El catálogo presenta una estructura desequilibrada, donde pocos productos generan
+        gran parte de las ventas, lo que refuerza la necesidad de identificar y proteger los
+        productos clave.
+      </li>
+      <li>
+        El precio influye negativamente en el volumen de ventas, pero no explica por sí solo
+        el éxito comercial; existen productos de precio elevado que funcionan bien cuando el
+        valor percibido es alto.
+      </li>
+      <li>
+        Las promociones incrementan significativamente tanto las ventas como la probabilidad
+        de éxito, pero su impacto no es homogéneo, por lo que deben aplicarse de forma selectiva.
+      </li>
+      <li>
+        La segmentación mediante clustering aporta una herramienta clara para diseñar
+        estrategias diferenciadas de pricing, promoción y gestión del catálogo.
+      </li>
+    </ul>
+
+    <p>
+      En conjunto, este proyecto demuestra cómo el uso combinado de análisis exploratorio,
+      modelos estadísticos y técnicas de segmentación permite transformar datos brutos en
+      información útil para la toma de decisiones. La integración de todas las fases ofrece
+      una visión completa y coherente del negocio, sentando las bases para futuras
+      extensiones del proyecto, como modelos predictivos más avanzados o la incorporación
+      de nuevas fuentes de datos.
+    </p>
+
+    <p>
+      Como entrega final, se incluyen todos los cuadernos de scripts (notebooks) utilizados
+      a lo largo del proyecto, debidamente documentados, comentados y preparados para su
+      ejecución completa de principio a fin (E2E), garantizando la reproducibilidad del
+      análisis.
+    </p>
+
+  </div>
+</div>
 
   </div>
 </div>
