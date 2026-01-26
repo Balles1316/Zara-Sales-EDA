@@ -159,23 +159,7 @@
   <!-- ========== FIN HERO ========== -->
 
   <!-- ========= CHUNK DE SETUP (R OCULTO) ========= -->
-<div class="chunk" id="setup"><div class="rcode"><div class="error"><pre class="knitr r">## Error in library(DBI): no hay paquete llamado 'DBI'
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in library(RPostgres): no hay paquete llamado 'RPostgres'
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in library(readr): no hay paquete llamado 'readr'
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in library(dplyr): no hay paquete llamado 'dplyr'
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in dbConnect(RPostgres::Postgres(), host = "192.168.1.194", port = 5432, : no se pudo encontrar la función "dbConnect"
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in read_csv2("Zara_sales.csv", show_col_types = FALSE): no se pudo encontrar la función "read_csv2"
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in rename(ventas, product_id = `Product ID`, product_position = `Product Position`, : no se pudo encontrar la función "rename"
-</pre></div>
-<div class="error"><pre class="knitr r">## Error in dbWriteTable(con, "zara_sales", ventas, overwrite = TRUE): no se pudo encontrar la función "dbWriteTable"
-</pre></div>
-</div></div>
+
 
   <!-- ========== CONTENIDO PRINCIPAL ========== -->
   <div class="layout">
@@ -237,13 +221,24 @@ GROUP BY section;
             </code>
           </div>
 
-<div class="error"><pre class="knitr r">## Error in dbGetQuery(con, "\n  SELECT section, COUNT(*) AS num_productos\n  FROM zara_sales\n  GROUP BY section;\n"): no se pudo encontrar la función "dbGetQuery"
-</pre></div>
-<div class="error"><pre class="knitr r">## Error: objeto 'res1' no encontrado
-</pre></div>
-<div class="error"><pre class="knitr r">## Error: objeto 'html' no encontrado
-</pre></div>
-
+<div class="result-card"><table class="table">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> section </th>
+   <th style="text-align:right;"> num_productos </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> MAN </td>
+   <td style="text-align:right;"> 6998 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> WOMAN </td>
+   <td style="text-align:right;"> 13254 </td>
+  </tr>
+</tbody>
+</table></div>
 
           <!-- 2) Ventas por temporada -->
           <div class="sql-card">
@@ -257,13 +252,37 @@ GROUP BY season;
             </code>
           </div>
 
-<div class="error"><pre class="knitr r">## Error in dbGetQuery(con, "\n  SELECT season,\n         AVG(sales) AS avg_sales,\n         SUM(sales) AS total_sales\n  FROM zara_sales\n  GROUP BY season;\n"): no se pudo encontrar la función "dbGetQuery"
-</pre></div>
-<div class="error"><pre class="knitr r">## Error: objeto 'res2' no encontrado
-</pre></div>
-<div class="error"><pre class="knitr r">## Error: objeto 'html' no encontrado
-</pre></div>
-
+<div class="result-card"><table class="table">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> season </th>
+   <th style="text-align:right;"> avg_sales </th>
+   <th style="text-align:right;"> total_sales </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Winter </td>
+   <td style="text-align:right;"> 1174.613 </td>
+   <td style="text-align:right;"> 6042207 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Summer </td>
+   <td style="text-align:right;"> 1184.589 </td>
+   <td style="text-align:right;"> 3442417 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Autumn </td>
+   <td style="text-align:right;"> 1042.820 </td>
+   <td style="text-align:right;"> 7993214 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Spring </td>
+   <td style="text-align:right;"> 1046.223 </td>
+   <td style="text-align:right;"> 4746716 </td>
+  </tr>
+</tbody>
+</table></div>
 
           <!-- 3) Ventas por rangos de precio -->
           <div class="sql-card">
@@ -280,13 +299,22 @@ GROUP BY rango_precio;
             </code>
           </div>
 
-<div class="error"><pre class="knitr r">## Error in dbGetQuery(con, "\n  SELECT CASE\n    WHEN price &lt; 20 THEN 'Bajo'\n    WHEN price BETWEEN 20 AND 39.99 THEN 'Medio'\n    ELSE 'Alto'\n  END AS rango_precio,\n  AVG(sales) AS avg_sales,\n  COUNT(*) AS num_productos\n  FROM zara_sales\n  GROUP BY rango_precio;\n"): no se pudo encontrar la función "dbGetQuery"
-</pre></div>
-<div class="error"><pre class="knitr r">## Error: objeto 'res3' no encontrado
-</pre></div>
-<div class="error"><pre class="knitr r">## Error: objeto 'html' no encontrado
-</pre></div>
-
+<div class="result-card"><table class="table">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> rango_precio </th>
+   <th style="text-align:right;"> avg_sales </th>
+   <th style="text-align:right;"> num_productos </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Alto </td>
+   <td style="text-align:right;"> 1097.4 </td>
+   <td style="text-align:right;"> 20252 </td>
+  </tr>
+</tbody>
+</table></div>
 
           <!-- 4) Promoción vs ventas -->
           <div class="sql-card">
@@ -300,13 +328,27 @@ GROUP BY promotion;
             </code>
           </div>
 
-<div class="error"><pre class="knitr r">## Error in dbGetQuery(con, "\n  SELECT promotion,\n         AVG(sales) AS avg_sales,\n         SUM(sales) AS total_sales\n  FROM zara_sales\n  GROUP BY promotion;\n"): no se pudo encontrar la función "dbGetQuery"
-</pre></div>
-<div class="error"><pre class="knitr r">## Error: objeto 'res4' no encontrado
-</pre></div>
-<div class="error"><pre class="knitr r">## Error: objeto 'html' no encontrado
-</pre></div>
-
+<div class="result-card"><table class="table">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> promotion </th>
+   <th style="text-align:right;"> avg_sales </th>
+   <th style="text-align:right;"> total_sales </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> No </td>
+   <td style="text-align:right;"> 872.3771 </td>
+   <td style="text-align:right;"> 10304518 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Yes </td>
+   <td style="text-align:right;"> 1412.3265 </td>
+   <td style="text-align:right;"> 11920036 </td>
+  </tr>
+</tbody>
+</table></div>
 
           <!-- 5) Ventas por origen -->
           <div class="sql-card">
@@ -320,13 +362,77 @@ GROUP BY origin;
             </code>
           </div>
 
-<div class="error"><pre class="knitr r">## Error in dbGetQuery(con, "\n  SELECT origin,\n         AVG(sales) AS avg_sales,\n         SUM(sales) AS total_sales\n  FROM zara_sales\n  GROUP BY origin;\n"): no se pudo encontrar la función "dbGetQuery"
-</pre></div>
-<div class="error"><pre class="knitr r">## Error: objeto 'res5' no encontrado
-</pre></div>
-<div class="error"><pre class="knitr r">## Error: objeto 'html' no encontrado
-</pre></div>
-
+<div class="result-card"><table class="table">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> origin </th>
+   <th style="text-align:right;"> avg_sales </th>
+   <th style="text-align:right;"> total_sales </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Bangladesh </td>
+   <td style="text-align:right;"> 1087.658 </td>
+   <td style="text-align:right;"> 3934058 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Cambodia </td>
+   <td style="text-align:right;"> 1091.422 </td>
+   <td style="text-align:right;"> 1070685 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Portugal </td>
+   <td style="text-align:right;"> 1094.743 </td>
+   <td style="text-align:right;"> 1554535 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Turkey </td>
+   <td style="text-align:right;"> 1091.313 </td>
+   <td style="text-align:right;"> 2700999 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> China </td>
+   <td style="text-align:right;"> 1106.441 </td>
+   <td style="text-align:right;"> 4454532 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Spain </td>
+   <td style="text-align:right;"> 1102.844 </td>
+   <td style="text-align:right;"> 1376349 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Argentina </td>
+   <td style="text-align:right;"> 1096.514 </td>
+   <td style="text-align:right;"> 196276 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> India </td>
+   <td style="text-align:right;"> 1096.032 </td>
+   <td style="text-align:right;"> 2228233 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Vietnam </td>
+   <td style="text-align:right;"> 1094.718 </td>
+   <td style="text-align:right;"> 1335556 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Pakistan </td>
+   <td style="text-align:right;"> 1095.286 </td>
+   <td style="text-align:right;"> 662648 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Brazil </td>
+   <td style="text-align:right;"> 1127.155 </td>
+   <td style="text-align:right;"> 896088 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Morocco </td>
+   <td style="text-align:right;"> 1097.759 </td>
+   <td style="text-align:right;"> 1814595 </td>
+  </tr>
+</tbody>
+</table></div>
 
           <!-- 6) Ventas por posición en tienda -->
           <div class="sql-card">
@@ -340,13 +446,32 @@ GROUP BY product_position;
             </code>
           </div>
 
-<div class="error"><pre class="knitr r">## Error in dbGetQuery(con, "\n  SELECT product_position,\n         AVG(sales) AS avg_sales,\n         COUNT(*) AS num_productos\n  FROM zara_sales\n  GROUP BY product_position;\n"): no se pudo encontrar la función "dbGetQuery"
-</pre></div>
-<div class="error"><pre class="knitr r">## Error: objeto 'res6' no encontrado
-</pre></div>
-<div class="error"><pre class="knitr r">## Error: objeto 'html' no encontrado
-</pre></div>
-
+<div class="result-card"><table class="table">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> product_position </th>
+   <th style="text-align:right;"> avg_sales </th>
+   <th style="text-align:right;"> num_productos </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Front of Store </td>
+   <td style="text-align:right;"> 1103.361 </td>
+   <td style="text-align:right;"> 5651 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Aisle </td>
+   <td style="text-align:right;"> 1090.427 </td>
+   <td style="text-align:right;"> 7810 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> End-cap </td>
+   <td style="text-align:right;"> 1100.460 </td>
+   <td style="text-align:right;"> 6791 </td>
+  </tr>
+</tbody>
+</table></div>
 
           <!-- 7) Ventas por colección (terms) -->
           <div class="sql-card">
@@ -360,13 +485,42 @@ GROUP BY terms;
             </code>
           </div>
 
-<div class="error"><pre class="knitr r">## Error in dbGetQuery(con, "\n  SELECT terms,\n         AVG(sales) AS avg_sales,\n         SUM(sales) AS total_sales\n  FROM zara_sales\n  GROUP BY terms;\n"): no se pudo encontrar la función "dbGetQuery"
-</pre></div>
-<div class="error"><pre class="knitr r">## Error: objeto 'res7' no encontrado
-</pre></div>
-<div class="error"><pre class="knitr r">## Error: objeto 'html' no encontrado
-</pre></div>
-
+<div class="result-card"><table class="table">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> terms </th>
+   <th style="text-align:right;"> avg_sales </th>
+   <th style="text-align:right;"> total_sales </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> shoes </td>
+   <td style="text-align:right;"> 1089.090 </td>
+   <td style="text-align:right;"> 2676982 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> t-shirts </td>
+   <td style="text-align:right;"> 1088.200 </td>
+   <td style="text-align:right;"> 2879378 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> sweaters </td>
+   <td style="text-align:right;"> 1104.926 </td>
+   <td style="text-align:right;"> 3598743 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> jeans </td>
+   <td style="text-align:right;"> 1094.549 </td>
+   <td style="text-align:right;"> 721308 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> jackets </td>
+   <td style="text-align:right;"> 1099.372 </td>
+   <td style="text-align:right;"> 12348143 </td>
+  </tr>
+</tbody>
+</table></div>
 
         </div>
       </div>
@@ -457,9 +611,7 @@ GROUP BY terms;
   </div>
 
   <!-- Cerrar conexión al final del documento -->
-<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="error"><pre class="knitr r">## Error in loadNamespace(x): no hay paquete llamado 'DBI'
-</pre></div>
-</div></div>
+
 
 </div>
 
